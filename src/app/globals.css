@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/* Custom Tailwind Token Overrides for Callix */
+@theme inline {
+  /* Base System */
+  --color-graphite: #000000;
+  --color-surface: #12131A;
+  --color-surface-hover: #1A1B23;
+  --color-steel: #1E2430;
+
+  /* Typography */
+  --color-primary: #F2F3F5;
+  --color-secondary: #D1D5DB;
+  --color-tertiary: #9CA3AF;
+
+  /* Brand Accents - Orange Theme */
+  --color-brand-blue: #FF6B2C;
+  --color-brand-purple: #FFFFFF;
+  --color-brand-blue-light: #FDBA74;
+  --color-brand-blue-deep: #C2410C;
+  --color-brand-orange: #FFFFFF;
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, #FF6B2C 0%, #C2410C 100%);
+  --gradient-brand-glow: radial-gradient(circle at center, rgba(255, 107, 44, 0.15) 0%, transparent 70%);
+  --gradient-subtle-mix: linear-gradient(135deg, rgba(255, 107, 44, 0.08) 0%, rgba(194, 65, 12, 0.08) 100%);
+
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Noe Display', 'Playfair Display', Georgia, serif;
+  --font-serif-elegant: 'Noe Display', 'Playfair Display', Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #000;
+    color: white;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Display/Headline font class */
+  .font-display,
+  .font-serif-elegant {
+    font-family: 'Noe Display', 'Playfair Display', Georgia, serif;
+  }
+}
+
+@layer utilities {
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 40s linear infinite;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .brand-text-gradient {
+    background: linear-gradient(135deg, #FF6B2C 0%, #C2410C 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes scan {
+    0% {
+      transform: translateY(-100%);
+    }
+
+    100% {
+      transform: translateY(400%);
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Shimmer Animation */
+  @keyframes shimmer-slide {
+    to {
+      transform: translate(calc(100cqw - 100%), 0);
+    }
+  }
+
+  @keyframes spin-around {
+    0% {
+      transform: translateZ(0) rotate(0);
+    }
+
+    15%,
+    35% {
+      transform: translateZ(0) rotate(90deg);
+    }
+
+    65%,
+    85% {
+      transform: translateZ(0) rotate(270deg);
+    }
+
+    100% {
+      transform: translateZ(0) rotate(360deg);
+    }
+  }
+
+  .animate-shimmer-slide {
+    animation: shimmer-slide var(--speed) ease-in-out infinite alternate;
+  }
+
+  .animate-spin-around {
+    animation: spin-around calc(var(--speed) * 2) infinite linear;
+  }
+}
