@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { ShimmerButton } from './ShimmerButton';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
@@ -87,13 +87,6 @@ const WhoBuiltFor: React.FC = () => {
     }
   };
 
-  // Scroll to end on mount so cards start pushed to the right
-  useEffect(() => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
-    }
-  }, []);
-
   return (
     <section className="w-full py-32 bg-black overflow-hidden border-t border-white/5 relative">
       {/* Section-specific gradient */}
@@ -132,7 +125,7 @@ const WhoBuiltFor: React.FC = () => {
 
       <div
         ref={scrollContainerRef}
-        className="flex w-full gap-6 overflow-x-auto no-scrollbar pb-10 scroll-smooth pl-6 lg:pl-12 pr-[calc(50vw-170px)] lg:pr-[calc(50vw-180px)]"
+        className="flex w-full gap-6 overflow-x-auto no-scrollbar pb-10 scroll-smooth pl-[max(1.5rem,calc((100vw-1400px)/2+1.5rem))] lg:pl-[max(3rem,calc((100vw-1400px)/2+3rem))] pr-6 lg:pr-12"
         style={{ scrollSnapType: 'x mandatory' }}
       >
         {cards.map((card, index) => (
