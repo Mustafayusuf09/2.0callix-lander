@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
               Turn Your Sales Calls Into <span className="italic relative">
                 Scroll Stopping
                 {/* Subtle blue underline for emphasis */}
-                <svg className="absolute w-full h-3 bottom-0 left-0 text-brand-purple -z-10 drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="2" fill="none" /></svg>
+                <svg className="absolute w-full h-3 bottom-0 left-0 text-[#FF6B2C] -z-10 drop-shadow-[0_0_8px_rgba(255,107,44,0.8)]" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="2" fill="none" /></svg>
               </span> Ads
             </h1>
 
@@ -60,8 +60,8 @@ const Hero: React.FC = () => {
                 <span className="text-white font-bold text-[16px] relative z-10 px-2">Book A Free "Prove It" Demo Today</span>
               </ShimmerButton>
               <div className="flex items-center gap-3 group cursor-pointer">
-                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5 backdrop-blur-xl shadow-[inset_0_0_10px_rgba(255,255,255,0.05),0_4px_10px_rgba(0,0,0,0.2)] group-hover:bg-white/10 transition-all">
-                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5 backdrop-blur-xl shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] group-hover:shadow-[0_0_20px_rgba(255,107,44,0.15)] group-hover:border-white/20 group-hover:bg-white/10 transition-all duration-500">
+                  <svg className="w-4 h-4 text-zinc-300 group-hover:text-white transition-colors duration-500" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
@@ -102,7 +102,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Integrated Testimonial Row */}
-        <div className="border-t border-white/5 pt-10 flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24 relative">
+        <div className="border-t border-white/5 pt-20 flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24 relative">
           <div className="flex flex-col relative max-w-[620px] shrink-0">
             <blockquote className="relative z-10">
               <p className="text-[16px] font-sans italic font-light leading-relaxed text-zinc-300 tracking-tight">
@@ -115,9 +115,9 @@ const Hero: React.FC = () => {
             <div className="flex items-center gap-4 mt-8">
               <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 bg-zinc-900 shrink-0 shadow-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200"
+                  src="/malcolm-bryant.png"
                   alt="Malcolm Bryant"
-                  className="w-full h-full object-cover grayscale brightness-110"
+                  className="w-full h-full object-cover brightness-110"
                 />
               </div>
               <div className="flex flex-col">

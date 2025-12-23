@@ -20,9 +20,7 @@ const Navbar: React.FC = () => {
     <nav className="fixed top-0 left-0 right-0 w-full z-[100] bg-black backdrop-blur-xl border-b border-steel/50">
       <div className="max-w-[1280px] mx-auto px-8 lg:px-16 py-4 flex items-center justify-between">
         <div className="flex items-center group cursor-pointer shrink-0">
-          <span className="text-[22px] font-bold tracking-tighter text-primary lowercase">
-            callix<span className="text-brand-blue">.</span>
-          </span>
+          <img src="/callix-logo.png" alt="Callix" className="h-[90px] w-auto object-contain -my-4 -ml-6" />
         </div>
 
         <div className="hidden lg:flex items-center mx-auto">

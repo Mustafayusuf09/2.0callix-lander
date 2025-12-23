@@ -16,7 +16,7 @@ const Security: React.FC = () => {
                 <div className="mb-16">
                     <h2 className="text-[48px] lg:text-[72px] font-serif-elegant font-normal tracking-tight leading-[1.05] mb-6">
                         Your data is protected by<br />
-                        <span className="text-brand-blue italic">enterprise-grade</span> security
+                        <span className="italic bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent">enterprise-grade</span> security
                     </h2>
                     <p className="text-[16px] text-zinc-400 max-w-[560px] leading-relaxed font-light">
                         We take security seriously. Your conversations and insights are protected by the same technology trusted by leading tech giants.
@@ -39,20 +39,20 @@ const Security: React.FC = () => {
                                     </div>
                                     <div>
                                         <div className="text-[14px] font-semibold text-white">SOC 2 Type II</div>
-                                        <div className="text-[11px] text-brand-blue flex items-center gap-1">
+                                        <div className="text-[11px] flex items-center gap-1">
                                             <span className="w-1.5 h-1.5 rounded-full bg-brand-blue" />
-                                            Certified & Audited
+                                            <span className="bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent font-medium">Certified & Audited</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="space-y-3">
                                     <div className="flex items-center justify-between py-2 border-b border-white/5">
                                         <span className="text-[13px] text-zinc-300">Security Controls</span>
-                                        <span className="text-[11px] font-bold text-brand-blue bg-brand-blue/10 px-2 py-0.5 rounded">PASS</span>
+                                        <span className="text-[11px] font-bold bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent bg-brand-blue/10 px-2 py-0.5 rounded border border-brand-blue/10">PASS</span>
                                     </div>
                                     <div className="flex items-center justify-between py-2">
                                         <span className="text-[13px] text-zinc-300">Availability</span>
-                                        <span className="text-[11px] font-bold text-brand-blue bg-brand-blue/10 px-2 py-0.5 rounded">PASS</span>
+                                        <span className="text-[11px] font-bold bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent bg-brand-blue/10 px-2 py-0.5 rounded border border-brand-blue/10">PASS</span>
                                     </div>
                                 </div>
                             </div>
@@ -210,15 +210,15 @@ const Security: React.FC = () => {
                                             <div className="text-[9px] text-zinc-400">Military-grade encryption</div>
                                         </div>
                                     </div>
-                                    <span className="text-[9px] text-brand-blue flex items-center gap-1">
+                                    <span className="text-[9px] flex items-center gap-1">
                                         <span className="w-1.5 h-1.5 rounded-full bg-brand-blue" />
-                                        Active
+                                        <span className="bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent font-medium">Active</span>
                                     </span>
                                 </div>
                                 <div className="mb-3">
                                     <div className="flex items-center justify-between mb-1">
                                         <span className="text-[10px] text-zinc-400">Encryption Strength</span>
-                                        <span className="text-[10px] text-brand-blue font-semibold">256-bit</span>
+                                        <span className="text-[10px] font-semibold bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent">256-bit</span>
                                     </div>
                                     <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
                                         <div className="h-full w-full bg-brand-blue rounded-full" />

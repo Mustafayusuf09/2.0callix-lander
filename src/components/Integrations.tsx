@@ -46,6 +46,12 @@ const Integrations: React.FC = () => {
     // Create refs for each integration
     const integrationRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+    // Force re-render to ensure refs are picked up
+    const [_, setTick] = React.useState(0);
+    React.useEffect(() => {
+        setTick(t => t + 1);
+    }, []);
+
     // Grouping for layout - include all 14 integrations
     const leftIntegrations = integrations.slice(0, 7);
     const rightIntegrations = integrations.slice(7, 14);

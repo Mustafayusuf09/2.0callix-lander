@@ -16,10 +16,8 @@ const Footer: React.FC = () => {
       <div className="max-w-[1280px] mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 mb-24">
           <div className="col-span-2 lg:col-span-2 flex flex-col gap-6">
-            <div className="flex items-center">
-              <span className="text-[28px] font-bold tracking-tighter text-white lowercase">
-                callix<span className="text-brand-blue">.</span>
-              </span>
+            <div className="flex items-center -ml-3">
+              <img src="/callix-logo.png" alt="Callix" className="h-[90px] w-auto object-contain" />
             </div>
             <p className="text-zinc-400 text-[14px] leading-relaxed max-w-[240px] font-light">
               The intelligence bridge between your sales calls and your high-performing marketing.

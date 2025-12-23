@@ -1,6 +1,5 @@
 'use client';
 
-
 import React from 'react';
 import { ShimmerButton } from './ShimmerButton';
 
@@ -90,10 +89,10 @@ const GeneratedAdVisual = () => {
       </div>
 
       {/* Text Content */}
-      <div className="space-y-2 mb-3 min-h-[40px]">
+      <div className="space-y-2 mb-3 h-[72px]">
         <div className="text-[11px] text-secondary leading-relaxed font-medium">
           {text1Part1}
-          <span className="text-brand-blue drop-shadow-[0_0_8px_rgba(255,107,44,0.5)]">{text1Part2}</span>
+          <span className="bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(255,107,44,0.5)]">{text1Part2}</span>
           {(step === 3) && <span className="inline-block w-1.5 h-3 bg-brand-blue ml-0.5 animate-pulse" />}
         </div>
         <div className="text-[10px] text-tertiary leading-relaxed">
@@ -130,7 +129,7 @@ const GeneratedAdVisual = () => {
               <div className="text-center px-2">
                 <p className="text-white text-[13px] font-bold leading-snug drop-shadow-lg">
                   "Stop losing leads to{' '}
-                  <span className="text-brand-blue drop-shadow-[0_0_8px_rgba(255,107,44,0.5)]">creative fatigue</span>"
+                  <span className="bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(255,107,44,0.5)]">creative fatigue</span>"
                 </p>
               </div>
 
@@ -160,7 +159,6 @@ const GeneratedAdVisual = () => {
           <div className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse" />
           <span className="text-[9px] text-tertiary">Ready to launch</span>
         </div>
-
 
         <ShimmerButton
           className="shadow-lg"
@@ -192,7 +190,7 @@ const ModernCapabilities: React.FC = () => {
       </div>
 
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="bg-surface border border-steel/50 rounded-3xl p-12 flex flex-col h-full min-h-[500px] relative overflow-hidden group">
+        <div className="bg-surface border border-steel/50 rounded-3xl p-8 flex flex-col h-full min-h-[420px] relative overflow-hidden group">
           {/* Zoom Call Visual - Dark Theme Fading into Card */}
           <div className="flex-1 flex items-center justify-center relative z-10 py-4">
             <div className="w-full max-w-[400px] relative">
@@ -212,7 +210,7 @@ const ModernCapabilities: React.FC = () => {
 
               {/* Callix Analyzing Banner */}
               <div className="mx-4 px-4 py-3 bg-brand-blue/10 rounded-2xl flex items-center justify-center gap-2 border border-brand-blue/20">
-                <span className="text-brand-blue text-[13px] font-semibold">Callix is analyzing this call</span>
+                <span className="text-[13px] font-semibold bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent transform">Callix is analyzing this call</span>
                 <div className="flex items-center gap-0.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse" />
                   <div className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse" style={{ animationDelay: '0.2s' }} />
@@ -253,19 +251,19 @@ const ModernCapabilities: React.FC = () => {
 
               {/* Bottom Controls */}
               <div className="flex items-center justify-center gap-3 px-4 py-3">
-                <div className="w-10 h-10 rounded-full bg-zinc-800/80 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-white/80" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all cursor-pointer">
+                  <svg className="w-4 h-4 text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
                     <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
                   </svg>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-zinc-800/80 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-white/80" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all cursor-pointer">
+                  <svg className="w-4 h-4 text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
                   </svg>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-zinc-800/80 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-white/80" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all cursor-pointer">
+                  <svg className="w-4 h-4 text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
                   </svg>
                 </div>
@@ -293,7 +291,7 @@ const ModernCapabilities: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-surface border border-steel/50 rounded-3xl p-12 flex flex-col h-full min-h-[500px] relative overflow-hidden">
+        <div className="bg-surface border border-steel/50 rounded-3xl p-8 flex flex-col h-full min-h-[420px] relative overflow-hidden">
           {/* Electrical circuit SVG effect behind X - Silver & Orange */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
             <defs>
@@ -426,7 +424,7 @@ const ModernCapabilities: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-surface border border-steel/50 rounded-3xl p-12 flex flex-col h-full min-h-[500px] relative overflow-hidden group">
+        <div className="bg-surface border border-steel/50 rounded-3xl p-8 flex flex-col h-full min-h-[420px] relative overflow-hidden group">
           {/* Background Upload Effect */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
             <defs>

@@ -59,14 +59,16 @@ const FAQ: React.FC = () => {
                 <span className={`text-[20px] lg:text-[24px] font-medium transition-colors duration-300 ${openIndex === index ? 'text-white' : 'text-zinc-200 group-hover:text-white'}`}>
                   {item.question}
                 </span>
-                <svg
-                  className={`w-5 h-5 text-zinc-500 transition-transform duration-500 ${openIndex === index ? 'rotate-180 text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]' : ''}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-                </svg>
+                <div className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center transition-all duration-500 ${openIndex === index ? 'bg-white shadow-[0_0_15px_rgba(255,255,255,0.4)]' : 'bg-white/5 hover:bg-white/10'}`}>
+                  <svg
+                    className={`w-4 h-4 transition-transform duration-500 ${openIndex === index ? 'rotate-180 text-black' : 'text-zinc-500'}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
               </button>
 
               <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? 'max-h-[300px] pb-8 opacity-100' : 'max-h-0 opacity-0'}`}>
