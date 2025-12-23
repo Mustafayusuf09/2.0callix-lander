@@ -46,7 +46,7 @@ const cards: CardData[] = [
 ];
 
 const IndustryCard: React.FC<CardData> = ({ title, imageUrl }) => (
-  <div className="min-w-[340px] lg:min-w-[360px] h-[460px] lg:h-[480px] rounded-[28px] bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#0a0a0a] border border-white/[0.08] relative overflow-hidden group shrink-0 shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:shadow-[0_30px_80px_rgba(0,0,0,0.6)] transition-all duration-500 hover:-translate-y-2">
+  <div className="min-w-[280px] lg:min-w-[320px] h-[380px] lg:h-[420px] rounded-[28px] bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#0a0a0a] border border-white/[0.1] relative overflow-hidden group shrink-0 shadow-[0_25px_70px_rgba(0,0,0,0.6)] hover:shadow-[0_35px_90px_rgba(0,0,0,0.7)] transition-all duration-500 hover:-translate-y-3">
     {/* Noise texture overlay */}
     <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIvPjwvc3ZnPg==')]" />
 
@@ -125,8 +125,12 @@ const WhoBuiltFor: React.FC = () => {
 
       <div
         ref={scrollContainerRef}
-        className="flex w-full gap-6 overflow-x-auto no-scrollbar pb-10 scroll-smooth pl-[max(1.5rem,calc((100vw-1400px)/2+1.5rem))] lg:pl-[max(3rem,calc((100vw-1400px)/2+3rem))] pr-6 lg:pr-12"
-        style={{ scrollSnapType: 'x mandatory' }}
+        className="flex w-full gap-6 overflow-x-auto no-scrollbar pb-10 scroll-smooth"
+        style={{
+          scrollSnapType: 'x mandatory',
+          marginLeft: '18vw',
+          paddingRight: '3rem'
+        }}
       >
         {cards.map((card, index) => (
           <div key={index} style={{ scrollSnapAlign: 'start' }}>
