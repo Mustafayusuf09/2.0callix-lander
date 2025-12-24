@@ -27,7 +27,7 @@ const IntelligentTools: React.FC = () => {
   };
 
   return (
-    <section className="w-full px-4 lg:px-16 py-32 z-10 bg-black relative">
+    <section className="w-full px-4 lg:px-16 py-32 z-10 bg-transparent relative">
       {/* Section-specific gradient - diagonal from top-right, deeper blue */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_100%_0%,_rgba(255,107,44,0.07),_transparent_50%)] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_30%_at_20%_80%,_rgba(255,107,44,0.04),_transparent_50%)] pointer-events-none" />

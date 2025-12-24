@@ -57,7 +57,7 @@ const Integrations: React.FC = () => {
     const rightIntegrations = integrations.slice(7, 14);
 
     return (
-        <section className="w-full px-8 lg:px-16 py-32 z-10 bg-black relative overflow-hidden">
+        <section className="w-full px-8 lg:px-16 py-32 z-10 bg-transparent relative overflow-hidden">
             {/* Section-specific gradient - stronger */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_20%_30%,_rgba(255,107,44,0.15),_transparent_60%)] pointer-events-none" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_80%_70%,_rgba(255,107,44,0.18),_transparent_60%)] pointer-events-none" />

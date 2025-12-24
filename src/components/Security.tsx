@@ -25,7 +25,7 @@ const Security: React.FC = () => {
     }, []);
 
     return (
-        <section className="w-full px-8 lg:px-16 py-24 z-10 bg-black relative">
+        <section className="w-full px-8 lg:px-16 py-24 z-10 bg-transparent relative">
             {/* Section-specific gradient - corner glows for protective framing */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_0%_0%,_rgba(255,107,44,0.06),_transparent_50%)] pointer-events-none" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_100%_100%,_rgba(255,107,44,0.08),_transparent_50%)] pointer-events-none" />

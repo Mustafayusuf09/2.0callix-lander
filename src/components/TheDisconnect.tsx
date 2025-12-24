@@ -133,7 +133,7 @@ const TheDisconnect: React.FC = () => {
     ];
 
     return (
-        <section className="w-full px-8 lg:px-16 py-32 z-10 bg-black relative overflow-hidden text-left">
+        <section className="w-full px-8 lg:px-16 py-32 z-10 bg-transparent relative overflow-hidden text-left">
             {/* Background Ambience */}
             <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-[800px] bg-[radial-gradient(ellipse_60%_60%_at_0%_50%,_rgba(255,107,44,0.1),_transparent_70%)] pointer-events-none" />
 

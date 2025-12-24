@@ -35,6 +35,7 @@ import {
     PieChart,
     Lightbulb
 } from 'lucide-react';
+import { ShimmerButton } from './ShimmerButton';
 
 const SecureByDesign: React.FC = () => {
     const [activeTab, setActiveTab] = useState(0);
@@ -344,7 +345,7 @@ const SecureByDesign: React.FC = () => {
     ];
 
     return (
-        <section className="w-full px-4 lg:px-8 pt-16 pb-24 lg:pt-20 lg:pb-40 z-10 bg-black relative overflow-hidden">
+        <section className="w-full px-4 lg:px-8 pt-16 pb-24 lg:pt-20 lg:pb-40 z-10 bg-transparent relative overflow-hidden">
             {/* Background Glow Effects */}
             <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-blue/5 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
             <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-900/10 rounded-full blur-[100px] pointer-events-none" />
@@ -399,10 +400,15 @@ const SecureByDesign: React.FC = () => {
                                 <p className="text-[11px] text-zinc-400 mb-3 leading-relaxed relative z-10 max-w-[90%]">
                                     Join high-growth revenue teams using Callix.
                                 </p>
-                                <button className="w-full py-2.5 rounded-lg bg-[#0A0A0B] border border-white/10 text-white text-xs font-medium hover:bg-zinc-900 transition-all shadow-[0_1px_0_0_rgba(255,255,255,0.1)_inset] relative z-10 group overflow-hidden">
-                                    <span className="relative z-10">Book a Demo</span>
-                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
-                                </button>
+                                <ShimmerButton
+                                    className="w-full h-9 text-xs font-medium shadow-lg"
+                                    background="#0A0A0B"
+                                    shimmerColor="#FFFFFF"
+                                    shimmerSize="0.05em"
+                                    borderRadius="100px" // Full pill shape as requested
+                                >
+                                    <span className="relative z-10 text-white group-hover:text-white/90 transition-colors">Book a Demo</span>
+                                </ShimmerButton>
                             </div>
                         </div>
                     </div>

@@ -35,7 +35,7 @@ const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="w-full px-8 lg:px-16 py-32 bg-black border-t border-white/5 relative">
+    <section className="w-full px-8 lg:px-16 py-32 bg-transparent border-t border-white/5 relative">
       {/* Section-specific gradient - subtle left-side glow for approachability */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_60%_at_-10%_50%,_rgba(255,107,44,0.05),_transparent_50%)] pointer-events-none" />
       <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">

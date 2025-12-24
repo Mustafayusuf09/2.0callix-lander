@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="w-full px-8 lg:px-16 pb-24 pt-32 bg-black z-10 border-t border-white/5">
+    <footer className="w-full px-8 lg:px-16 pb-24 pt-32 bg-transparent z-10 border-t border-white/5">
       <div className="max-w-[1280px] mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 mb-24">
           <div className="col-span-2 lg:col-span-2 flex flex-col gap-6">

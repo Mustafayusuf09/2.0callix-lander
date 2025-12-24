@@ -177,9 +177,9 @@ const GeneratedAdVisual = () => {
 
 const ModernCapabilities: React.FC = () => {
   return (
-    <section className="w-full px-8 lg:px-16 py-32 z-10 bg-graphite relative">
-      {/* Section-specific gradient - centered subtle pulse */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_30%,_rgba(255,107,44,0.06),_transparent_70%)] pointer-events-none" />
+    <section className="w-full px-8 lg:px-16 py-32 z-10 bg-transparent relative">
+      {/* Section-specific gradient - centered subtle pulse - Intensified */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_30%,_rgba(255,107,44,0.2),_transparent_70%)] pointer-events-none" />
       <div className="max-w-[1280px] mx-auto text-center mb-24">
         <h2 className="text-[48px] lg:text-[72px] font-serif-elegant font-normal tracking-tight leading-[1.05] mb-8 text-primary">
           How <span className="italic">Callix</span> Works
@@ -291,7 +291,7 @@ const ModernCapabilities: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-surface border border-steel/50 rounded-3xl p-5 flex flex-col h-full min-h-[360px] relative overflow-hidden">
+        <div className="bg-surface border border-steel/50 rounded-3xl p-5 flex flex-col h-full min-h-[360px] relative overflow-hidden group">
           {/* Electrical circuit SVG effect behind X - Silver & Orange */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
             <defs>
@@ -323,6 +323,14 @@ const ModernCapabilities: React.FC = () => {
                 <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
                 <stop offset="100%" stopColor="#e2e8f0" stopOpacity="0" />
               </linearGradient>
+              {/* X Metallic Gradient */}
+              <linearGradient id="xMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#cbd5e1" />
+                <stop offset="25%" stopColor="#f8fafc" />
+                <stop offset="50%" stopColor="#94a3b8" />
+                <stop offset="75%" stopColor="#e2e8f0" />
+                <stop offset="100%" stopColor="#64748b" />
+              </linearGradient>
               {/* Glow filters */}
               <filter id="electricGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="3" result="blur" />
@@ -341,79 +349,67 @@ const ModernCapabilities: React.FC = () => {
             </defs>
 
             {/* Background soft glow - Silver */}
-            <g filter="url(#silverGlow)" opacity="0.2">
-              <path d="M0,200 L120,200 L140,180 L160,180 L180,200 L200,200" stroke="#e2e8f0" strokeWidth="2" fill="none" />
-              <path d="M400,200 L280,200 L260,220 L240,220 L220,200 L200,200" stroke="#e2e8f0" strokeWidth="2" fill="none" />
+            <g filter="url(#silverGlow)">
+              <path d="M0,200 L120,200 L140,180 L160,180 L180,200 L200,200" stroke="url(#electricSilver)" strokeWidth="2" fill="none" opacity="0.3" />
+              <path d="M400,200 L280,200 L260,220 L240,220 L220,200 L200,200" stroke="url(#electricSilver)" strokeWidth="2" fill="none" opacity="0.3" />
+              {/* Diagonal Background Hints */}
+              <path d="M100,100 L180,180" stroke="url(#electricSilver)" strokeWidth="2" fill="none" opacity="0.3" />
+              <path d="M300,100 L220,180" stroke="url(#electricSilver)" strokeWidth="2" fill="none" opacity="0.3" />
+
+              {/* Bottom Middle Vertical Extension - Metallic */}
+              <path d="M200,400 L200,300 L220,280 L220,100" stroke="url(#electricSilverV)" strokeWidth="2" fill="none" opacity="0.6" />
             </g>
 
             {/* Main electrical paths - Blue */}
             <g filter="url(#electricGlow)">
-              {/* Left horizontal - Blue */}
               <path d="M0,200 L100,200 L120,180 L140,180" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.7">
                 <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="3s" repeatCount="indefinite" />
               </path>
-              <path d="M0,230 L90,230 L110,210 L130,210" stroke="url(#electricBlue)" strokeWidth="1" fill="none" opacity="0.4">
-                <animate attributeName="stroke-dasharray" values="0,190;190,0;0,190" dur="2.8s" repeatCount="indefinite" />
-              </path>
-
-              {/* Right horizontal - Blue */}
               <path d="M400,200 L300,200 L280,220 L260,220" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.7">
                 <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="3s" repeatCount="indefinite" />
               </path>
-              <path d="M400,230 L310,230 L290,210 L270,210" stroke="url(#electricBlue)" strokeWidth="1" fill="none" opacity="0.4">
-                <animate attributeName="stroke-dasharray" values="0,190;190,0;0,190" dur="2.8s" repeatCount="indefinite" />
+
+              {/* Diagonal Feeders Connecting to X */}
+              <path d="M80,80 L160,160" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.6">
+                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2.5s" repeatCount="indefinite" />
+              </path>
+              <path d="M320,80 L240,160" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.6">
+                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2.7s" repeatCount="indefinite" />
+              </path>
+              <path d="M80,320 L160,240" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.6">
+                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2.9s" repeatCount="indefinite" />
+              </path>
+              <path d="M320,320 L240,240" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.6">
+                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="3.1s" repeatCount="indefinite" />
               </path>
             </g>
 
             {/* Silver metallic paths */}
             <g filter="url(#silverGlow)">
-              {/* Left horizontal - Silver */}
               <path d="M0,170 L80,170 L100,190 L120,190" stroke="url(#electricSilver)" strokeWidth="1" fill="none" opacity="0.6">
                 <animate attributeName="stroke-dasharray" values="0,180;180,0;0,180" dur="2.5s" repeatCount="indefinite" />
               </path>
-
-              {/* Right horizontal - Silver */}
               <path d="M400,170 L320,170 L300,190 L280,190" stroke="url(#electricSilver)" strokeWidth="1" fill="none" opacity="0.6">
                 <animate attributeName="stroke-dasharray" values="0,180;180,0;0,180" dur="2.5s" repeatCount="indefinite" />
               </path>
-
-              {/* Top vertical - Silver */}
               <path d="M200,0 L200,100 L180,120 L180,140" stroke="url(#electricSilverV)" strokeWidth="1.5" fill="none" opacity="0.5">
                 <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="3.2s" repeatCount="indefinite" />
               </path>
-
-              {/* Bottom vertical - Silver */}
               <path d="M200,400 L200,300 L220,280 L220,260" stroke="url(#electricSilverV)" strokeWidth="1.5" fill="none" opacity="0.5">
                 <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="3.2s" repeatCount="indefinite" />
               </path>
             </g>
-
-            {/* Diagonal connectors - alternating */}
-            <g filter="url(#electricGlow)">
-              <path d="M100,100 L140,140 L160,140 L180,160" stroke="#e2e8f0" strokeWidth="1" fill="none" opacity="0.3">
-                <animate attributeName="opacity" values="0.1;0.5;0.1" dur="2s" repeatCount="indefinite" />
-              </path>
-              <path d="M300,100 L260,140 L240,140 L220,160" stroke="#FF6B2C" strokeWidth="1" fill="none" opacity="0.3">
-                <animate attributeName="opacity" values="0.1;0.5;0.1" dur="2.2s" repeatCount="indefinite" />
-              </path>
-              <path d="M100,300 L140,260 L160,260 L180,240" stroke="#FF6B2C" strokeWidth="1" fill="none" opacity="0.3">
-                <animate attributeName="opacity" values="0.1;0.5;0.1" dur="2.4s" repeatCount="indefinite" />
-              </path>
-              <path d="M300,300 L260,260 L240,260 L220,240" stroke="#e2e8f0" strokeWidth="1" fill="none" opacity="0.3">
-                <animate attributeName="opacity" values="0.1;0.5;0.1" dur="2.6s" repeatCount="indefinite" />
-              </path>
-            </g>
-
           </svg>
 
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
-            <div className="relative">
+            <div className="relative group/x">
+              <div className="absolute inset-0 bg-brand-blue/20 blur-[60px] rounded-full group-hover/x:bg-brand-blue/30 transition-all duration-500" />
               <div className="relative z-10 flex items-center justify-center">
-                {/* Orange Metallic X Logo */}
+                {/* Image X Logo */}
                 <img
                   src="/silver-x.png"
-                  alt="Callix AI"
-                  className="w-48 h-48 object-contain drop-shadow-2xl"
+                  alt="AI Psychology"
+                  className="w-[220px] h-[220px] object-contain drop-shadow-2xl relative z-20 mt-20"
                 />
               </div>
             </div>
