@@ -10,6 +10,7 @@ const LogoSet: React.FC = () => (
     <span className="text-[18px] font-mono font-medium text-tertiary hover:text-primary lowercase tracking-tighter">framelabs.so</span>
     <span className="text-[14px] font-bold text-tertiary hover:text-primary uppercase tracking-[0.2em] whitespace-nowrap">THE SOVEREIGN MAN</span>
     <span className="text-[22px] font-bold text-tertiary hover:text-primary tracking-tighter">Momentum.io</span>
+    <span className="text-[20px] font-bold text-tertiary hover:text-primary tracking-tight">Mailmend.io</span>
   </>
 );
 
@@ -51,49 +52,48 @@ const Hero: React.FC = () => {
               Stop burning ad spend on garbage leads. Callix turns sales calls into banger ad creatives that deliver profitable customers to your sales teams calendar - in one click.
             </p>
 
-            <div className="flex flex-wrap items-center gap-8">
-              {/* Glassmorphism Button */}
+            <div className="flex flex-wrap items-center gap-5">
+              {/* Hyper Liquid Button 1 - Book A Demo */}
               <button className="relative group/btn cursor-pointer">
-                {/* Glow backing */}
-                <div className="absolute inset-0 bg-brand-blue/20 rounded-full blur-[20px] opacity-0 group-hover/btn:opacity-40 transition-opacity duration-500" />
+                {/* Fluid ambient glow */}
+                <div className="absolute -inset-4 bg-gradient-to-r from-brand-blue/30 via-white/20 to-brand-blue/30 blur-2xl opacity-0 group-hover/btn:opacity-60 transition-opacity duration-700 animate-pulse" />
 
-                {/* Glass Container */}
-                <div className="relative rounded-full bg-white/5 backdrop-blur-[12px] border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] transition-all duration-300 group-hover/btn:bg-white/10 group-hover/btn:shadow-[0_8px_32px_0_rgba(255,107,44,0.1)] group-hover/btn:border-white/20 active:scale-95">
-                  <div className="relative px-8 py-4 flex items-center gap-2">
-                    {/* Inner highlight for volume */}
-                    <div className="absolute inset-0 rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] pointer-events-none" />
+                <div className="relative rounded-[24px] transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover/btn:scale-[1.05] active:scale-[0.95]">
+                  <div className="relative overflow-hidden rounded-[24px] backdrop-blur-[12px] bg-white/[0.02] shadow-[inset_0_0_20px_rgba(255,255,255,0.2),inset_0_1px_0_rgba(255,255,255,0.6),0_10px_40px_-10px_rgba(0,0,0,0.3)] ring-1 ring-white/20 group-hover/btn:bg-white/[0.05] transition-all duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-200%] group-hover/btn:animate-[shimmer-slide_1.5s_infinite]" />
+                    <div className="absolute inset-x-5 top-0 h-[2px] bg-white/80 blur-[1px] rounded-full" />
+                    <div className="absolute inset-x-7 top-1 h-[16px] bg-gradient-to-b from-white/60 to-transparent blur-[6px] opacity-80" />
 
-                    <span className="text-[16px] font-bold text-white tracking-wide drop-shadow-sm">
-                      Book A Demo
-                    </span>
+                    <div className="relative px-7 py-3 flex items-center gap-2">
+                      <span className="text-[15px] font-bold text-white tracking-wide relative z-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+                        Book A Demo
+                      </span>
+                    </div>
                   </div>
                 </div>
               </button>
 
-              <div className="group relative flex items-center gap-4 cursor-pointer">
-                {/* Glass Play Button */}
-                <div className="relative w-14 h-14 transition-transform duration-300 group-hover:scale-[1.05] active:scale-95">
-                  <div className="absolute inset-0 bg-brand-blue/20 rounded-full blur-[20px] opacity-0 group-hover:opacity-40 transition-opacity duration-500" />
+              {/* Hyper Liquid Button 2 - Watch Product Demo */}
+              <button className="relative group/btn cursor-pointer">
+                <div className="absolute -inset-4 bg-gradient-to-r from-brand-blue/30 via-white/20 to-brand-blue/30 blur-2xl opacity-0 group-hover/btn:opacity-60 transition-opacity duration-700 animate-pulse" />
 
-                  <div className="relative h-full w-full rounded-full bg-white/5 backdrop-blur-[12px] border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] flex items-center justify-center transition-all duration-300 group-hover:bg-white/10 group-hover:border-white/20">
-                    {/* Inner highlight */}
-                    <div className="absolute inset-0 rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] pointer-events-none" />
+                <div className="relative rounded-[24px] transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover/btn:scale-[1.05] active:scale-[0.95]">
+                  <div className="relative overflow-hidden rounded-[24px] backdrop-blur-[12px] bg-white/[0.02] shadow-[inset_0_0_20px_rgba(255,255,255,0.2),inset_0_1px_0_rgba(255,255,255,0.6),0_10px_40px_-10px_rgba(0,0,0,0.3)] ring-1 ring-white/20 group-hover/btn:bg-white/[0.05] transition-all duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-200%] group-hover/btn:animate-[shimmer-slide_1.5s_infinite]" />
+                    <div className="absolute inset-x-5 top-0 h-[2px] bg-white/80 blur-[1px] rounded-full" />
+                    <div className="absolute inset-x-7 top-1 h-[16px] bg-gradient-to-b from-white/60 to-transparent blur-[6px] opacity-80" />
 
-                    <svg className="w-5 h-5 text-white fill-white drop-shadow-sm relative z-10 ml-1 group-hover:text-[#FF6B2C] group-hover:fill-[#FF6B2C] transition-colors duration-300" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
+                    <div className="relative px-7 py-3 flex items-center gap-2.5">
+                      <span className="text-[15px] font-bold text-white tracking-wide relative z-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+                        Watch Product Demo
+                      </span>
+                      <span className="text-[12px] font-mono font-medium text-white/50 tracking-wide relative z-10 mix-blend-plus-lighter border-l border-white/20 pl-2.5">
+                        (2 min)
+                      </span>
+                    </div>
                   </div>
                 </div>
-
-                <div className="flex flex-col">
-                  <span className="text-white font-medium text-[15px] group-hover:text-[#FF6B2C] transition-colors leading-tight drop-shadow-md">
-                    Watch Product Demo
-                  </span>
-                  <span className="text-zinc-500 text-[12px] font-mono mt-0.5 group-hover:text-zinc-400 transition-colors">
-                    (2 min)
-                  </span>
-                </div>
-              </div>
+              </button>
             </div>
 
             {/* Founders Testimonial moved below buttons */}
@@ -130,12 +130,10 @@ const Hero: React.FC = () => {
           <div className="relative hidden lg:block z-10">
             <div className="relative w-full aspect-video rounded-[48px] overflow-hidden border border-brand-blue/20 bg-black shadow-[0_20px_80px_rgba(255,107,44,0.35)] flex items-center justify-center group cursor-pointer">
 
-              {/* Centered Play Button Design */}
+              {/* Simplified Play Button */}
               <div className="relative z-20 flex items-center justify-center">
-                <div className="absolute w-20 h-20 rounded-full bg-brand-blue/10 blur-xl animate-pulse" />
-
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-white/10 via-[#FF6B2C]/10 to-[#FF6B2C]/30 backdrop-blur-3xl border border-white/20 flex items-center justify-center shadow-[inset_0_0_20px_rgba(255,255,255,0.1),0_10px_40px_rgba(255,107,44,0.3)] group-hover:scale-110 transition-transform duration-500 group-hover:border-[#FF6B2C]/40">
-                  <svg className="w-8 h-8 text-white ml-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" fill="currentColor" viewBox="0 0 24 24">
+                <div className="relative w-24 h-24 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.1] active:scale-[0.95]">
+                  <svg className="w-24 h-24 text-white drop-shadow-xl transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>

@@ -3,13 +3,15 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import WhoBuiltFor from '@/components/WhoBuiltFor';
-import TheDisconnect from '@/components/TheDisconnect';
+import TheDisconnect from '@/components/TheDisconnect'; // Revenue Gold Mine
 import TheBreakthrough from '@/components/TheBreakthrough';
-import ModernCapabilities from '@/components/ModernCapabilities';
-import SecureByDesign from '@/components/SecureByDesign';
-import IntelligentTools from '@/components/IntelligentTools';
+import ModernCapabilities from '@/components/ModernCapabilities'; // How Callix Works
+import SecureByDesign from '@/components/SecureByDesign'; // Everything you need to scale
+import IntelligentTools from '@/components/IntelligentTools'; // US VS. THEM
+import StatsSection from '@/components/StatsSection'; // THE RESULT
+import TestimonialCarousel from '@/components/TestimonialCarousel'; // TESTIMONIALS
 import Integrations from '@/components/Integrations';
-import Security from '@/components/Security';
+import Security from '@/components/Security'; // COMPLIANCE
 import FAQ from '@/components/FAQ';
 import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
@@ -29,12 +31,13 @@ export default function Home() {
 
         <main>
           <Hero />
+          <WhoBuiltFor />
           <TheDisconnect />
-          <TheBreakthrough />
           <ModernCapabilities />
           <SecureByDesign />
-          <WhoBuiltFor />
           <IntelligentTools />
+          <StatsSection />
+          <TestimonialCarousel />
           <Integrations />
           <Security />
           <FAQ />
@@ -42,6 +45,9 @@ export default function Home() {
         </main>
 
         <Footer />
+
+        {/* Sections explicitly requested to be below footer */}
+        <TheBreakthrough />
       </div>
 
       {/* Subtle global ambient glow - Orange Themed */}

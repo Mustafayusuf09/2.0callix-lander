@@ -12,36 +12,20 @@ interface CardData {
 
 const cards: CardData[] = [
   {
-    title: "Marketing\nDepartments",
+    title: "Marketing & Sales\nAgencies",
     imageUrl: "/industry-cards/marketing.png",
   },
   {
-    title: "Media\nBuyers",
-    imageUrl: "/industry-cards/media.png",
-  },
-  {
-    title: "Revenue\nTeams",
-    imageUrl: "/industry-cards/revenue.png",
-  },
-  {
-    title: "Founders",
+    title: "High-Ticket Coaches\n& Consultants",
     imageUrl: "/industry-cards/founders.png",
   },
   {
-    title: "Product\nTeams",
+    title: "B2B Software\nTeams",
     imageUrl: "/industry-cards/product.png",
   },
   {
-    title: "Sales\nTeams",
+    title: "Sales & Marketing\nManagers",
     imageUrl: "/industry-cards/sales.png",
-  },
-  {
-    title: "E-commerce",
-    imageUrl: "/industry-cards/ecommerce.png",
-  },
-  {
-    title: "Startups",
-    imageUrl: "/industry-cards/marketing.png",
   }
 ];
 
@@ -98,30 +82,6 @@ const WhoBuiltFor: React.FC = () => {
         <h2 className="text-[48px] lg:text-[72px] font-serif-elegant font-normal tracking-tight leading-[1.05] text-white">
           Who we're built for
         </h2>
-        <div className="flex gap-4">
-          <ShimmerButton
-            onClick={() => scroll('left')}
-            className="w-12 h-12 flex items-center justify-center shadow-2xl"
-            background="black"
-            shimmerColor="#FFFFFF"
-            shimmerSize="0.1em"
-            borderRadius="999px"
-            style={{ padding: 0 }}
-          >
-            <ChevronLeft size={24} className="relative z-10 text-white group-hover:text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)] transition-colors" />
-          </ShimmerButton>
-          <ShimmerButton
-            onClick={() => scroll('right')}
-            className="w-12 h-12 flex items-center justify-center shadow-2xl"
-            background="black"
-            shimmerColor="#FFFFFF"
-            shimmerSize="0.1em"
-            borderRadius="999px"
-            style={{ padding: 0 }}
-          >
-            <ChevronRight size={24} className="relative z-10 text-white group-hover:text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)] transition-colors" />
-          </ShimmerButton>
-        </div>
       </div>
 
       <div
@@ -129,7 +89,7 @@ const WhoBuiltFor: React.FC = () => {
         className="flex w-full gap-6 overflow-x-auto no-scrollbar pb-10 scroll-smooth"
         style={{
           scrollSnapType: 'x mandatory',
-          marginLeft: '18vw',
+          marginLeft: '10vw',
           paddingRight: '3rem'
         }}
       >
