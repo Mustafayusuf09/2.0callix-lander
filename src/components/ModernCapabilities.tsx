@@ -189,86 +189,86 @@ const ModernCapabilities: React.FC = () => {
         </p>
       </div>
 
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="bg-surface border border-steel/50 rounded-3xl p-8 flex flex-col h-full min-h-[420px] relative overflow-hidden group">
+      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="bg-surface border border-steel/50 rounded-3xl p-5 flex flex-col h-full min-h-[360px] relative overflow-hidden group">
           {/* Zoom Call Visual - Dark Theme Fading into Card */}
-          <div className="flex-1 flex items-center justify-center relative z-10 py-4">
-            <div className="w-full max-w-[400px] relative">
+          <div className="flex-1 flex items-center justify-center relative z-10 py-2">
+            <div className="w-full max-w-[300px] relative">
 
               {/* Top Header - Discovery Call */}
-              <div className="flex items-center justify-between px-4 py-3">
+              <div className="flex items-center justify-between px-4 py-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-white font-semibold text-[13px]">Discovery Call</span>
-                  <span className="text-zinc-500 text-[13px]">|</span>
-                  <span className="text-zinc-500 text-[13px]">12:34</span>
+                  <span className="text-white font-semibold text-[11px]">Discovery Call</span>
+                  <span className="text-zinc-500 text-[11px]">|</span>
+                  <span className="text-zinc-500 text-[11px]">12:34</span>
                 </div>
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/20 border border-red-500/30">
-                  <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                  <span className="text-red-400 text-[11px] font-semibold">REC</span>
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-500/20 border border-red-500/30">
+                  <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                  <span className="text-red-400 text-[9px] font-semibold">REC</span>
                 </div>
               </div>
 
               {/* Callix Analyzing Banner */}
-              <div className="mx-4 px-4 py-3 bg-brand-blue/10 rounded-2xl flex items-center justify-center gap-2 border border-brand-blue/20">
-                <span className="text-[13px] font-semibold bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent transform">Callix is analyzing this call</span>
+              <div className="mx-4 px-3 py-2 bg-brand-blue/10 rounded-xl flex items-center justify-center gap-2 border border-brand-blue/20 mb-2">
+                <span className="text-[11px] font-semibold bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent transform">Callix is analyzing this call</span>
                 <div className="flex items-center gap-0.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse" />
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse" style={{ animationDelay: '0.2s' }} />
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse" style={{ animationDelay: '0.4s' }} />
+                  <div className="w-1 h-1 rounded-full bg-brand-blue animate-pulse" />
+                  <div className="w-1 h-1 rounded-full bg-brand-blue animate-pulse" style={{ animationDelay: '0.2s' }} />
+                  <div className="w-1 h-1 rounded-full bg-brand-blue animate-pulse" style={{ animationDelay: '0.4s' }} />
                 </div>
               </div>
 
               {/* Video Grid - 2 people side by side */}
-              <div className="p-4">
-                <div className="grid grid-cols-2 gap-3">
+              <div className="px-4 pb-2">
+                <div className="grid grid-cols-2 gap-2">
                   {/* Participant 1 - Emma */}
-                  <div className="relative aspect-[4/3] bg-zinc-800 rounded-xl overflow-hidden">
+                  <div className="relative aspect-[4/3] bg-zinc-800 rounded-lg overflow-hidden">
                     <img
                       src="/emma.jpg"
                       alt="Emma"
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-2 left-2">
-                      <span className="text-[11px] text-white font-medium bg-black/50 px-2.5 py-1 rounded-md">Emma</span>
+                    <div className="absolute bottom-1.5 left-2">
+                      <span className="text-[9px] text-white font-medium bg-black/50 px-2 py-0.5 rounded-md">Emma</span>
                     </div>
                   </div>
 
                   {/* Participant 2 - John (with orange border) */}
-                  <div className="relative aspect-[4/3] bg-zinc-800 rounded-xl overflow-hidden ring-2 ring-brand-blue">
+                  <div className="relative aspect-[4/3] bg-zinc-800 rounded-lg overflow-hidden ring-1 ring-brand-blue">
                     <img
                       src="/john.jpg"
                       alt="John"
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-2 left-2">
-                      <span className="text-[11px] text-white font-medium bg-black/50 px-2.5 py-1 rounded-md">John</span>
+                    <div className="absolute bottom-1.5 left-2">
+                      <span className="text-[9px] text-white font-medium bg-black/50 px-2 py-0.5 rounded-md">John</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Bottom Controls */}
-              <div className="flex items-center justify-center gap-3 px-4 py-3">
-                <div className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all cursor-pointer">
-                  <svg className="w-4 h-4 text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center justify-center gap-2 px-4 py-2">
+                <div className="w-8 h-8 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all cursor-pointer">
+                  <svg className="w-3 h-3 text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
                     <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
                   </svg>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all cursor-pointer">
-                  <svg className="w-4 h-4 text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all cursor-pointer">
+                  <svg className="w-3 h-3 text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
                   </svg>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all cursor-pointer">
-                  <svg className="w-4 h-4 text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all cursor-pointer">
+                  <svg className="w-3 h-3 text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
                   </svg>
                 </div>
-                <button className="px-5 py-2.5 rounded-full bg-red-500 text-white font-semibold text-[13px] flex items-center gap-2 shadow-lg hover:bg-red-600 transition-colors">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <button className="px-4 py-2 rounded-full bg-red-500 text-white font-semibold text-[11px] flex items-center gap-1.5 shadow-lg hover:bg-red-600 transition-colors">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.73-1.68-1.36-2.66-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z" />
                   </svg>
                   Leave
@@ -277,21 +277,21 @@ const ModernCapabilities: React.FC = () => {
 
               {/* Fade edges to blend with card */}
               <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-surface to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-surface to-transparent" />
-                <div className="absolute top-0 bottom-0 left-0 w-4 bg-gradient-to-r from-surface to-transparent" />
-                <div className="absolute top-0 bottom-0 right-0 w-4 bg-gradient-to-l from-surface to-transparent" />
+                <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-surface to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-surface to-transparent" />
+                <div className="absolute top-0 bottom-0 left-0 w-3 bg-gradient-to-r from-surface to-transparent" />
+                <div className="absolute top-0 bottom-0 right-0 w-3 bg-gradient-to-l from-surface to-transparent" />
               </div>
             </div>
           </div>
 
           <div className="mt-4 relative z-10">
-            <h3 className="text-[18px] font-semibold mb-3 text-primary">Capture Every Call</h3>
-            <p className="text-secondary text-[14px] leading-relaxed">Connect in one click. Every call is recorded, transcribed, and analyzed instantly with perfect accuracy.</p>
+            <h3 className="text-[16px] font-semibold mb-2 text-primary">Capture Every Call</h3>
+            <p className="text-secondary text-[13px] leading-relaxed">Connect in one click. Every call is recorded, transcribed, and analyzed instantly with perfect accuracy.</p>
           </div>
         </div>
 
-        <div className="bg-surface border border-steel/50 rounded-3xl p-8 flex flex-col h-full min-h-[420px] relative overflow-hidden">
+        <div className="bg-surface border border-steel/50 rounded-3xl p-5 flex flex-col h-full min-h-[360px] relative overflow-hidden">
           {/* Electrical circuit SVG effect behind X - Silver & Orange */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
             <defs>
@@ -407,24 +407,24 @@ const ModernCapabilities: React.FC = () => {
           </svg>
 
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
-            <div className="relative mt-32">
+            <div className="relative">
               <div className="relative z-10 flex items-center justify-center">
                 {/* Orange Metallic X Logo */}
                 <img
                   src="/silver-x.png"
                   alt="Callix AI"
-                  className="w-56 h-56 object-contain drop-shadow-2xl"
+                  className="w-48 h-48 object-contain drop-shadow-2xl"
                 />
               </div>
             </div>
           </div>
           <div className="mt-8 relative z-10">
-            <h3 className="text-[18px] font-semibold mb-3 text-primary">AI Extracts Psychology</h3>
-            <p className="text-secondary text-[14px] leading-relaxed">Our engine identifies who converts, why they act, and what triggers kill intent before you lose a lead.</p>
+            <h3 className="text-[16px] font-semibold mb-2 text-primary">AI Extracts Psychology</h3>
+            <p className="text-secondary text-[13px] leading-relaxed">Our engine identifies who converts, why they act, and what triggers kill intent before you lose a lead.</p>
           </div>
         </div>
 
-        <div className="bg-surface border border-steel/50 rounded-3xl p-8 flex flex-col h-full min-h-[420px] relative overflow-hidden group">
+        <div className="bg-surface border border-steel/50 rounded-3xl p-5 flex flex-col h-full min-h-[360px] relative overflow-hidden group">
           {/* Background Upload Effect */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
             <defs>
@@ -449,13 +449,15 @@ const ModernCapabilities: React.FC = () => {
           </svg>
 
           {/* Generated Ad Visual */}
-          <div className="flex-1 flex items-center justify-center relative z-10 py-8">
-            <GeneratedAdVisual />
+          <div className="flex-1 flex items-center justify-center relative z-10 py-6">
+            <div className="scale-90 origin-center">
+              <GeneratedAdVisual />
+            </div>
           </div>
 
           <div className="mt-4 relative z-10">
-            <h3 className="text-[18px] font-semibold mb-3 text-primary">Deploy Insights Into Ads</h3>
-            <p className="text-secondary text-[14px] leading-relaxed">Turn signals into ready-to-run ad copy, video scripts, and messaging backed by real conversations.</p>
+            <h3 className="text-[16px] font-semibold mb-2 text-primary">Deploy Insights Into Ads</h3>
+            <p className="text-secondary text-[13px] leading-relaxed">Turn signals into ready-to-run ad copy, video scripts, and messaging backed by real conversations.</p>
           </div>
         </div>
       </div >

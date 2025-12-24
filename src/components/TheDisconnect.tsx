@@ -146,7 +146,7 @@ const TheDisconnect: React.FC = () => {
                             <span className="text-[11px] font-mono font-bold text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)] uppercase tracking-[0.2em]">The Disconnect</span>
                         </div>
 
-                        <h2 className="text-[40px] lg:text-[64px] font-serif-elegant font-normal tracking-tight leading-[1.05] mb-8 text-white">
+                        <h2 className="text-[48px] lg:text-[72px] font-serif-elegant font-normal tracking-tight leading-[1.05] mb-8 text-white">
                             Your Sales Team Is Sitting On A <br />
                             <span className="italic bg-gradient-to-r from-[#FF6B2C] via-[#ff8f6b] to-white bg-clip-text text-transparent">Revenue Gold Mine</span>
                         </h2>

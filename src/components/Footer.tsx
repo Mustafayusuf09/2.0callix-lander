@@ -5,7 +5,7 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   const footerLinks = {
-    Product: ['Intelligence Engine', 'Conversation Analysis', 'Creative Generation', 'API Docs'],
+    Product: ['Intelligence Engine', 'Conversation Analysis', 'Creative Generation'],
     Solutions: ['Marketing Directors', 'Sales Leaders', 'Revenue Ops', 'Founders'],
     Company: ['About Us', 'Careers', 'Privacy Policy', 'Security'],
     Connect: ['Contact Support', 'Book a Demo', 'LinkedIn', 'Twitter']
@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
             <div className="flex items-center -ml-3">
               <img src="/callix-logo.png" alt="Callix" className="h-[90px] w-auto object-contain" />
             </div>
-            <p className="text-zinc-400 text-[14px] leading-relaxed max-w-[240px] font-light">
+            <p className="text-zinc-400 text-[14px] leading-relaxed max-w-[320px] font-light">
               The intelligence bridge between your sales calls and your high-performing marketing.
             </p>
           </div>
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="pt-12 border-t border-white/5">
-          <p className="text-[12px] text-zinc-700 leading-relaxed font-light">
+          <p className="text-[12px] text-zinc-500 leading-relaxed font-light">
             © 2025 Callix AI. All rights reserved. SOC 2 Type II Certified. AES-256 Encrypted.
             Privacy is our priority. Callix provides conversation intelligence for revenue-focused organizations.
           </p>

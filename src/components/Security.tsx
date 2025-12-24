@@ -1,11 +1,29 @@
 'use client';
 
 
-import React from 'react';
-import { Check, Shield, Users, Lock, FileCheck, Key } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Check, Shield, Users, Lock, FileCheck, Key, MousePointer2 } from 'lucide-react';
 import { ShimmerButton } from './ShimmerButton';
+import { motion } from 'framer-motion';
 
 const Security: React.FC = () => {
+    const [roleStep, setRoleStep] = useState("hidden");
+
+    useEffect(() => {
+        const loop = async () => {
+            while (true) {
+                setRoleStep("show");
+
+                // Cycle duration: Animation (~2s) + Hold (3s) = 5s
+                await new Promise(resolve => setTimeout(resolve, 5000));
+                setRoleStep("hidden");
+                // Reset duration / Pause between cycles
+                await new Promise(resolve => setTimeout(resolve, 2500));
+            }
+        };
+        loop();
+    }, []);
+
     return (
         <section className="w-full px-8 lg:px-16 py-24 z-10 bg-black relative">
             {/* Section-specific gradient - corner glows for protective framing */}
@@ -14,23 +32,35 @@ const Security: React.FC = () => {
             <div className="max-w-[1280px] mx-auto">
                 {/* Header */}
                 <div className="mb-16">
-                    <h2 className="text-[48px] lg:text-[72px] font-serif-elegant font-normal tracking-tight leading-[1.05] mb-6">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="text-[48px] lg:text-[72px] font-serif-elegant font-normal tracking-tight leading-[1.05] mb-6"
+                    >
                         Your data is protected by<br />
                         <span className="italic bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent">enterprise-grade</span> security
-                    </h2>
-                    <p className="text-[16px] text-zinc-400 max-w-[560px] leading-relaxed font-light">
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                        className="text-[16px] text-zinc-400 max-w-[560px] leading-relaxed font-light"
+                    >
                         We take security seriously. Your conversations and insights are protected by the same technology trusted by leading tech giants.
-                    </p>
+                    </motion.p>
                 </div>
 
                 {/* Bento Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
                     {/* SOC 2 Type II - Large Card */}
-                    <div className="lg:col-span-2 bg-zinc-900/40 border border-white/5 rounded-3xl p-6 flex flex-col">
+                    <div className="lg:col-span-2 bg-zinc-900/40 border border-white/5 rounded-3xl p-6 flex flex-col group hover:border-white/10 transition-colors duration-500">
                         {/* Visual */}
                         <div className="flex-1 flex items-center justify-center py-4">
-                            <div className="bg-zinc-800/50 rounded-2xl p-6 border border-white/5 w-full max-w-[280px]">
+                            <div className="bg-zinc-800/50 rounded-2xl p-6 border border-white/5 w-full max-w-[280px] relative overflow-hidden">
                                 <div className="flex items-center gap-3 mb-6">
                                     <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-white/10 via-[#FF6B2C]/20 to-[#FF6B2C]/40 backdrop-blur-xl border border-white/10 flex items-center justify-center shadow-[inset_0_0_15px_rgba(255,255,255,0.05),0_8px_20px_rgba(255,107,44,0.2)]">
                                         <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 text-white drop-shadow-md">
@@ -40,7 +70,7 @@ const Security: React.FC = () => {
                                     <div>
                                         <div className="text-[14px] font-semibold text-white">SOC 2 Type II</div>
                                         <div className="text-[11px] flex items-center gap-1">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-blue" />
+                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse" />
                                             <span className="bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent font-medium">Certified & Audited</span>
                                         </div>
                                     </div>
@@ -48,11 +78,23 @@ const Security: React.FC = () => {
                                 <div className="space-y-3">
                                     <div className="flex items-center justify-between py-2 border-b border-white/5">
                                         <span className="text-[13px] text-zinc-300">Security Controls</span>
-                                        <span className="text-[11px] font-bold bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent bg-brand-blue/10 px-2 py-0.5 rounded border border-brand-blue/10">PASS</span>
+                                        <motion.span
+                                            animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
+                                            transition={{ duration: 3, repeat: Infinity, delay: 0, repeatDelay: 1 }}
+                                            className="text-[11px] font-bold bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent bg-brand-blue/10 px-2 py-0.5 rounded border border-brand-blue/10"
+                                        >
+                                            PASS
+                                        </motion.span>
                                     </div>
                                     <div className="flex items-center justify-between py-2">
                                         <span className="text-[13px] text-zinc-300">Availability</span>
-                                        <span className="text-[11px] font-bold bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent bg-brand-blue/10 px-2 py-0.5 rounded border border-brand-blue/10">PASS</span>
+                                        <motion.span
+                                            animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
+                                            transition={{ duration: 3, repeat: Infinity, delay: 1.5, repeatDelay: 1 }}
+                                            className="text-[11px] font-bold bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent bg-brand-blue/10 px-2 py-0.5 rounded border border-brand-blue/10"
+                                        >
+                                            PASS
+                                        </motion.span>
                                     </div>
                                 </div>
                             </div>
@@ -72,18 +114,23 @@ const Security: React.FC = () => {
                     </div>
 
                     {/* SSO Integration */}
-                    <div className="bg-zinc-900/40 border border-white/5 rounded-3xl p-6 flex flex-col">
+                    <div className="bg-zinc-900/40 border border-white/5 rounded-3xl p-6 flex flex-col group hover:border-white/10 transition-colors duration-500">
                         <div className="flex-1 flex items-center justify-center py-4">
 
-                            <ShimmerButton
-                                className="shadow-2xl font-semibold text-[14px]"
-                                background="black"
-                                shimmerColor="#FFFFFF"
-                                shimmerSize="0.1em"
-                                borderRadius="100px"
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
                             >
-                                <span className="relative z-10 text-white">Sign in with SSO</span>
-                            </ShimmerButton>
+                                <ShimmerButton
+                                    className="shadow-2xl font-semibold text-[14px]"
+                                    background="black"
+                                    shimmerColor="#FFFFFF"
+                                    shimmerSize="0.1em"
+                                    borderRadius="100px"
+                                >
+                                    <span className="relative z-10 text-white">Sign in with SSO</span>
+                                </ShimmerButton>
+                            </motion.div>
                         </div>
 
                         <div className="mt-4">
@@ -100,17 +147,38 @@ const Security: React.FC = () => {
                     </div>
 
                     {/* Role-Based Access */}
-                    <div className="bg-zinc-900/40 border border-white/5 rounded-3xl p-6 flex flex-col">
+                    <div className="bg-zinc-900/40 border border-white/5 rounded-3xl p-6 flex flex-col group hover:border-white/10 transition-colors duration-500">
                         <div className="flex-1 flex items-center justify-center py-4">
                             <div className="bg-zinc-800/50 rounded-2xl p-4 border border-white/5 w-full max-w-[220px]">
                                 <div className="text-[10px] text-zinc-400 uppercase tracking-wider mb-3">Team Access</div>
-                                <div className="space-y-2">
+                                <motion.div
+                                    className="space-y-2"
+                                    initial="hidden"
+                                    animate={roleStep}
+                                    variants={{
+                                        hidden: { opacity: 0 },
+                                        show: {
+                                            opacity: 1,
+                                            transition: {
+                                                staggerChildren: 0.3,
+                                                delayChildren: 0.1
+                                            }
+                                        }
+                                    }}
+                                >
                                     {[
                                         { name: 'John D.', role: 'Admin', color: 'bg-brand-blue' },
                                         { name: 'Sarah S.', role: 'Manager', color: 'bg-zinc-600' },
                                         { name: 'Mike K.', role: 'Viewer', color: 'bg-zinc-700' }
                                     ].map((user, i) => (
-                                        <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+                                        <motion.div
+                                            key={i}
+                                            variants={{
+                                                hidden: { opacity: 0, x: -15 },
+                                                show: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+                                            }}
+                                            className="flex items-center justify-between py-2 border-b border-white/5 last:border-0"
+                                        >
                                             <div className="flex items-center gap-2">
                                                 <div className={`w-6 h-6 rounded-full ${user.color} flex items-center justify-center text-[9px] font-bold text-white`}>
                                                     {user.name.split(' ').map(n => n[0]).join('')}
@@ -118,9 +186,9 @@ const Security: React.FC = () => {
                                                 <span className="text-[12px] text-zinc-300">{user.name}</span>
                                             </div>
                                             <span className="text-[10px] text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded">{user.role}</span>
-                                        </div>
+                                        </motion.div>
                                     ))}
-                                </div>
+                                </motion.div>
                             </div>
                         </div>
                         <div className="mt-4">
@@ -137,28 +205,63 @@ const Security: React.FC = () => {
                     </div>
 
                     {/* Consent Management */}
-                    <div className="bg-zinc-900/40 border border-white/5 rounded-3xl p-6 flex flex-col">
+                    <div className="bg-zinc-900/40 border border-white/5 rounded-3xl p-6 flex flex-col group hover:border-white/10 transition-colors duration-500">
                         <div className="flex-1 flex items-center justify-center py-4">
                             <div className="bg-zinc-800/50 rounded-2xl p-4 border border-white/5 w-full max-w-[220px]">
                                 <div className="flex items-center justify-between mb-4">
                                     <span className="text-[10px] text-zinc-400 uppercase tracking-wider">Compliance</span>
                                     <span className="text-[9px] text-red-400 flex items-center gap-1">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+                                        <motion.span
+                                            animate={{ opacity: [1, 0.4, 1] }}
+                                            transition={{ duration: 2, repeat: Infinity }}
+                                            className="w-1.5 h-1.5 rounded-full bg-red-400"
+                                        />
                                         REC
                                     </span>
                                 </div>
                                 <div className="space-y-3">
                                     <div className="flex items-center justify-between">
                                         <span className="text-[12px] text-zinc-300">Auto-Consent</span>
-                                        <div className="w-10 h-5 rounded-full bg-brand-blue relative">
-                                            <div className="absolute right-0.5 top-0.5 w-4 h-4 rounded-full bg-white" />
+                                        <div className="relative">
+                                            <motion.div
+                                                animate={{ backgroundColor: ["#3f3f46", "#3f3f46", "#FF6B2C", "#FF6B2C", "#3f3f46"] }}
+                                                transition={{ duration: 6, repeat: Infinity, times: [0, 0.4, 0.5, 0.9, 1], repeatDelay: 1 }}
+                                                className="w-10 h-5 rounded-full relative"
+                                            >
+                                                <motion.div
+                                                    animate={{ x: [2, 2, 22, 22, 2] }}
+                                                    transition={{ duration: 6, repeat: Infinity, times: [0, 0.4, 0.5, 0.9, 1], ease: "easeInOut", repeatDelay: 1 }}
+                                                    className="absolute top-0.5 w-4 h-4 rounded-full bg-white"
+                                                />
+                                            </motion.div>
+                                            {/* Cursor Animation */}
+                                            <motion.div
+                                                animate={{
+                                                    opacity: [0, 1, 1, 0, 0],
+                                                    x: [30, 10, 10, 30, 30],
+                                                    y: [30, 10, 10, 30, 30],
+                                                    scale: [1, 1, 0.8, 1, 1]
+                                                }}
+                                                transition={{
+                                                    duration: 6,
+                                                    repeat: Infinity,
+                                                    times: [0, 0.2, 0.4, 0.6, 1], // Appear, Click, Retreat
+                                                    ease: "easeInOut",
+                                                    repeatDelay: 1
+                                                }}
+                                                className="absolute -bottom-[2px] -right-[2px] z-50 pointer-events-none"
+                                            >
+                                                <MousePointer2 className="w-4 h-4 fill-white text-white drop-shadow-lg" />
+                                            </motion.div>
                                         </div>
                                     </div>
                                     <div className="flex items-center justify-between">
                                         <span className="text-[12px] text-zinc-300">Encryption</span>
-                                        <div className="w-10 h-5 rounded-full bg-zinc-700 relative">
+                                        <motion.div
+                                            className="w-10 h-5 rounded-full bg-zinc-700 relative"
+                                        >
                                             <div className="absolute left-0.5 top-0.5 w-4 h-4 rounded-full bg-zinc-500" />
-                                        </div>
+                                        </motion.div>
                                     </div>
                                 </div>
                             </div>
@@ -177,16 +280,55 @@ const Security: React.FC = () => {
                     </div>
 
                     {/* GDPR & CCPA */}
-                    <div className="bg-zinc-900/40 border border-white/5 rounded-3xl p-6 flex flex-col items-center justify-center">
+                    <div className="bg-zinc-900/40 border border-white/5 rounded-3xl p-6 flex flex-col group hover:border-white/10 transition-colors duration-500">
                         <div className="flex-1 flex items-center justify-center py-4">
-                            <div className="w-28 h-28 rounded-[2rem] bg-gradient-to-br from-white/10 via-[#FF6B2C]/20 to-[#FF6B2C]/40 backdrop-blur-2xl border border-white/10 flex items-center justify-center shadow-[inset_0_0_20px_rgba(255,255,255,0.05),0_12px_32px_rgba(255,107,44,0.3)]">
-                                <svg viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-white drop-shadow-lg">
-                                    <path fillRule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" clipRule="evenodd" />
-                                </svg>
+                            <div className="flex gap-3">
+                                {/* GDPR Badge */}
+                                <motion.div
+                                    animate={{ y: [0, -5, 0], opacity: [0.8, 1, 0.8] }}
+                                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
+                                    className="bg-zinc-800/50 rounded-xl p-3 border border-white/5 w-24 text-center"
+                                >
+                                    <div className="w-10 h-10 mx-auto mb-2 rounded-lg bg-gradient-to-br from-brand-blue/20 to-brand-blue/5 border border-brand-blue/20 flex items-center justify-center">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-brand-blue">
+                                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+                                        </svg>
+                                    </div>
+                                    <div className="text-[11px] font-bold text-white mb-1">GDPR</div>
+                                    <motion.div
+                                        animate={{ opacity: [0, 1, 1, 0] }}
+                                        transition={{ duration: 5, repeat: Infinity, times: [0, 0.2, 0.8, 1], repeatDelay: 1 }}
+                                        className="text-[9px] text-emerald-400 flex items-center justify-center gap-1"
+                                    >
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 bg-white" />
+                                        Verified
+                                    </motion.div>
+                                </motion.div>
+                                {/* CCPA Badge */}
+                                <motion.div
+                                    animate={{ y: [0, -5, 0], opacity: [0.8, 1, 0.8] }}
+                                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2.5, repeatDelay: 1 }}
+                                    className="bg-zinc-800/50 rounded-xl p-3 border border-white/5 w-24 text-center"
+                                >
+                                    <div className="w-10 h-10 mx-auto mb-2 rounded-lg bg-gradient-to-br from-brand-blue/20 to-brand-blue/5 border border-brand-blue/20 flex items-center justify-center">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-brand-blue">
+                                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+                                        </svg>
+                                    </div>
+                                    <div className="text-[11px] font-bold text-white mb-1">CCPA</div>
+                                    <motion.div
+                                        animate={{ opacity: [0, 1, 1, 0] }}
+                                        transition={{ duration: 5, repeat: Infinity, times: [0, 0.2, 0.8, 1], delay: 2.5, repeatDelay: 1 }}
+                                        className="text-[9px] text-emerald-400 flex items-center justify-center gap-1"
+                                    >
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                                        Verified
+                                    </motion.div>
+                                </motion.div>
                             </div>
                         </div>
-                        <div className="mt-4 text-center">
-                            <div className="flex items-center justify-center gap-3 mb-2">
+                        <div className="mt-4">
+                            <div className="flex items-center gap-3 mb-2">
                                 <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-white/10 via-[#FF6B2C]/20 to-[#FF6B2C]/40 backdrop-blur-xl border border-white/10 flex items-center justify-center shadow-[inset_0_0_15px_rgba(255,255,255,0.05),0_8px_20px_rgba(255,107,44,0.2)]">
                                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-white drop-shadow-md">
                                         <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
@@ -199,7 +341,7 @@ const Security: React.FC = () => {
                     </div>
 
                     {/* AES-256 Encryption */}
-                    <div className="lg:col-span-2 bg-zinc-900/40 border border-white/5 rounded-3xl p-6 flex flex-col">
+                    <div className="lg:col-span-2 bg-zinc-900/40 border border-white/5 rounded-3xl p-6 flex flex-col group hover:border-white/10 transition-colors duration-500">
                         <div className="flex-1 flex items-center justify-center py-4">
                             <div className="bg-brand-blue/10 border border-brand-blue/20 rounded-2xl p-4 w-full max-w-[260px]">
                                 <div className="flex items-center justify-between mb-4">
@@ -211,7 +353,11 @@ const Security: React.FC = () => {
                                         </div>
                                     </div>
                                     <span className="text-[9px] flex items-center gap-1">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-brand-blue" />
+                                        <motion.span
+                                            animate={{ opacity: [1, 0.4, 1] }}
+                                            transition={{ duration: 3, repeat: Infinity }}
+                                            className="w-1.5 h-1.5 rounded-full bg-brand-blue"
+                                        />
                                         <span className="bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent font-medium">Active</span>
                                     </span>
                                 </div>
@@ -221,7 +367,11 @@ const Security: React.FC = () => {
                                         <span className="text-[10px] font-semibold bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent">256-bit</span>
                                     </div>
                                     <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                                        <div className="h-full w-full bg-brand-blue rounded-full" />
+                                        <motion.div
+                                            animate={{ width: ["0%", "100%", "100%", "0%"] }}
+                                            transition={{ duration: 6, repeat: Infinity, times: [0, 0.4, 0.8, 1], ease: "easeInOut", repeatDelay: 2 }}
+                                            className="h-full w-full bg-brand-blue rounded-full"
+                                        />
                                     </div>
                                 </div>
                                 <div className="flex items-center justify-between pt-2 border-t border-white/5">

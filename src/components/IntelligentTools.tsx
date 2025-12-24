@@ -33,8 +33,7 @@ const IntelligentTools: React.FC = () => {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_30%_at_20%_80%,_rgba(255,107,44,0.04),_transparent_50%)] pointer-events-none" />
       <div className="max-w-[1280px] mx-auto text-center mb-16">
         <h2 className="text-[48px] lg:text-[72px] font-serif-elegant font-normal tracking-tight leading-[1.05] mb-8">
-          Finally, <span className="italic">one platform</span> <br />
-          for the entire revenue cycle.
+          One Platform, <span className="italic">Every Insight</span>
         </h2>
       </div>
 
@@ -43,7 +42,7 @@ const IntelligentTools: React.FC = () => {
           <thead>
             <tr className="bg-zinc-900/50">
               <th className="px-6 py-5 text-[12px] font-bold uppercase tracking-widest text-zinc-400">Feature</th>
-              <th className="px-5 py-5 text-[13px] font-bold uppercase tracking-widest text-white text-center bg-brand-blue/25 border-x-2 border-t-2 border-white shadow-[inset_0_0_15px_rgba(255,255,255,0.1),0_0_10px_rgba(255,255,255,0.3)]">Callix</th>
+              <th className="px-5 py-5 text-[13px] font-bold uppercase tracking-widest text-white text-center bg-brand-blue/50 border-x-2 border-t-2 border-white shadow-[inset_0_0_15px_rgba(255,255,255,0.1),0_0_10px_rgba(255,255,255,0.3)]">Callix</th>
               {competitors.map(comp => (
                 <th key={comp} className="px-5 py-5 text-[12px] font-bold uppercase tracking-widest text-zinc-400 text-center">
                   {competitorNames[comp]}
@@ -55,7 +54,7 @@ const IntelligentTools: React.FC = () => {
             {comparison.map((row, i) => (
               <tr key={i} className="group hover:bg-white/[0.02] transition-colors">
                 <td className="px-6 py-5 text-[16px] text-zinc-300 font-normal">{row.feature}</td>
-                <td className="px-5 py-5 text-center bg-brand-blue/15 border-x-2 border-white/80 shadow-[0_0_8px_rgba(255,255,255,0.2)]">
+                <td className={`px-5 py-5 text-center bg-brand-blue/30 border-x-2 border-white/80 shadow-[0_0_8px_rgba(255,255,255,0.2)] ${i === comparison.length - 1 ? 'border-b-2 border-white' : ''}`}>
                   <span className="text-[18px] text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)] font-bold">✓</span>
                 </td>
                 {competitors.map(comp => (

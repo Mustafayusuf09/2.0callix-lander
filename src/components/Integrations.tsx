@@ -98,10 +98,8 @@ const Integrations: React.FC = () => {
 
                         {/* Center Column */}
                         <div className="flex flex-col justify-center">
-                            <Circle ref={centerRef} className="size-20 lg:size-28 border-brand-blue/30 bg-black">
-                                <span className="text-[20px] lg:text-[28px] font-bold tracking-tighter text-white lowercase">
-                                    callix<span className="text-brand-blue">.</span>
-                                </span>
+                            <Circle ref={centerRef} className="size-20 lg:size-28 border-brand-blue/30 bg-black p-4">
+                                <img src="/logos/callix-chevron.png" alt="Callix" className="w-full h-full object-contain" />
                             </Circle>
                         </div>
 

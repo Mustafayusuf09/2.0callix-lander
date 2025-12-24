@@ -89,6 +89,17 @@
   .font-serif-elegant {
     font-family: 'Noe Display', 'Playfair Display', Georgia, serif;
   }
+
+  /* Brighter subtext colors globally */
+  .text-zinc-500 {
+    color: #a1a1aa !important;
+    /* Brighter than default zinc-500 (#71717a) */
+  }
+
+  .text-zinc-400 {
+    color: #d4d4d8 !important;
+    /* Brighter than default zinc-400 (#a1a1aa) */
+  }
 }
 
 @layer utilities {

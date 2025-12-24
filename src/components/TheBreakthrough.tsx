@@ -136,9 +136,9 @@ const TheBreakthrough: React.FC = () => {
                             <span className="text-[11px] font-mono font-bold text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)] uppercase tracking-[0.2em]">The Breakthrough</span>
                         </div>
 
-                        <h2 className="text-[40px] lg:text-[60px] font-serif-elegant font-normal tracking-tight leading-[1.1] mb-8">
-                            What If Every Sales Call Automatically Became <br />
-                            <span className="italic bg-gradient-to-r from-[#FF6B2C] via-[#ff8f6b] to-white bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,107,44,0.3)]">Actionable Revenue Intelligence?</span>
+                        <h2 className="text-[48px] lg:text-[72px] font-serif-elegant font-normal tracking-tight leading-[1.1] mb-8">
+                            What If Every Call <br />
+                            Became <span className="italic bg-gradient-to-r from-[#FF6B2C] via-[#ff8f6b] to-white bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,107,44,0.3)] pr-4">Revenue Intelligence?</span>
                         </h2>
 
                         <p className="text-[18px] text-zinc-300 leading-relaxed font-light mb-12 max-w-[600px]">

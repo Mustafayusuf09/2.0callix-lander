@@ -90,6 +90,7 @@ const WhoBuiltFor: React.FC = () => {
   return (
     <section className="w-full py-32 bg-black overflow-hidden border-t border-white/5 relative">
       {/* Section-specific gradient */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_-10%,_rgba(255,107,44,0.15),_transparent_70%)] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_0%_100%,_rgba(255,107,44,0.08),_transparent_60%)] pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
 
