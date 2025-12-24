@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import WhoBuiltFor from '@/components/WhoBuiltFor';
 import TheDisconnect from '@/components/TheDisconnect'; // Revenue Gold Mine
-import TheBreakthrough from '@/components/TheBreakthrough';
+
 import ModernCapabilities from '@/components/ModernCapabilities'; // How Callix Works
 import SecureByDesign from '@/components/SecureByDesign'; // Everything you need to scale
 import IntelligentTools from '@/components/IntelligentTools'; // US VS. THEM
@@ -47,7 +47,7 @@ export default function Home() {
         <Footer />
 
         {/* Sections explicitly requested to be below footer */}
-        <TheBreakthrough />
+
       </div>
 
       {/* Subtle global ambient glow - Orange Themed */}
