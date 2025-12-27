@@ -730,7 +730,7 @@ const PixelOptimizationVisual: React.FC = () => {
                     {/* Central Processing Node */}
                     <div className="w-10 h-10 rounded-full bg-[#0F0F11] border border-white/10 flex items-center justify-center z-20 shadow-[0_0_20px_-5px_rgba(0,0,0,0.8)] relative">
                         <div className="absolute inset-0 rounded-full border border-white/5 animate-pulse" />
-                        <img src="/callix-logo.png" alt="Callix AI" className="w-5 h-5 object-contain opacity-90" />
+                        <img src="/callix-chevron-new.png" alt="Callix AI" className="w-5 h-5 object-contain opacity-90" />
                     </div>
 
                     {/* Right Line */}
@@ -747,33 +747,26 @@ const PixelOptimizationVisual: React.FC = () => {
                 <div className="relative">
                     <div className="grid grid-cols-2 gap-2.5 p-3 rounded-[20px] bg-[#0A0A0B] border border-white/10 shadow-2xl relative z-10 ring-1 ring-white/5">
                         {/* Google */}
-                        {/* Google */}
+                        {/* Meta */}
                         <div className="w-10 h-10 rounded-full bg-zinc-900/50 flex items-center justify-center border border-white/5 transition-all">
-                            <img src="/logos/google_ads.png" alt="Google" className="w-4 h-4 object-contain opacity-100 transition-all duration-300" />
+                            <img src="/logos/meta.png" alt="Meta" className="w-5 h-5 object-contain opacity-100" />
                         </div>
 
-                        {/* TikTok */}
-                        {/* TikTok */}
+                        {/* LinkedIn */}
                         <div className="w-10 h-10 rounded-full bg-zinc-900/50 flex items-center justify-center border border-white/5 transition-all">
-                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-white transition-colors duration-300">
-                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                            <img src="/logos/linkedin.png" alt="LinkedIn" className="w-5 h-5 object-contain opacity-100" />
+                        </div>
+
+                        {/* Google Ads */}
+                        <div className="w-10 h-10 rounded-full bg-zinc-900/50 flex items-center justify-center border border-white/5 transition-all">
+                            <img src="/logos/google_ads_new.png" alt="Google Ads" className="w-5 h-5 object-contain opacity-100" />
+                        </div>
+
+                        {/* X (Twitter) */}
+                        <div className="w-10 h-10 rounded-full bg-zinc-900/50 flex items-center justify-center border border-white/5 transition-all">
+                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-white">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                             </svg>
-                        </div>
-
-                        {/* Instagram */}
-                        {/* Instagram */}
-                        <div className="w-10 h-10 rounded-full bg-zinc-900/50 flex items-center justify-center border border-white/5 transition-all">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-[#E1306C] transition-colors duration-300">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                            </svg>
-                        </div>
-
-                        {/* Facebook */}
-                        {/* Facebook */}
-                        <div className="w-10 h-10 rounded-full bg-zinc-900/50 flex items-center justify-center border border-white/5 transition-all">
-                            <Facebook size={16} className="text-[#1877F2] transition-colors duration-300" />
                         </div>
                     </div>
                     <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-mono uppercase tracking-widest text-zinc-500 font-medium whitespace-nowrap opacity-60">
