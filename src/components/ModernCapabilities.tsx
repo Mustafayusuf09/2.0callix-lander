@@ -1,464 +1,672 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ShimmerButton } from './ShimmerButton';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
+import { Mic, Video, PhoneOff, Hand, MoreVertical, LayoutGrid, Info, MessageSquare, Users, Smile, ChevronUp, MonitorUp, CheckCircle, AlertCircle, Calendar, Zap, TrendingUp, Youtube } from 'lucide-react';
 
-const GeneratedAdVisual = () => {
-  const [step, setStep] = React.useState(0);
-  const [text1Part1, setText1Part1] = React.useState("");
-  const [text1Part2, setText1Part2] = React.useState("");
-  const [text2, setText2] = React.useState("");
+const features = [
+    {
+        id: 0,
+        step: "Step 1: Capture",
+        title: "Capture",
+        description: "Connect Zoom, Google Meet, or your dialer. Every call captured automatically.",
+    },
+    {
+        id: 1,
+        step: "Step 2: Extract",
+        title: "Extract",
+        description: "AI identifies buying signals, objection patterns, and the exact language that converts.",
+    },
+    {
+        id: 2,
+        step: "Step 3: Optimize",
+        title: "Optimize",
+        description: "Feed those signals to Meta, Google, and LinkedIn. Platforms optimize for customers who close — not just click.",
+    },
+    {
+        id: 3,
+        step: "Step 4: Create",
+        title: "Create",
+        description: "Turn call insights into video & static ad creatives that attract your best buyers.",
+    }
+];
 
-  React.useEffect(() => {
-    let active = true;
+const FeatureItem = ({
+    feature,
+    index,
+    activeFeature,
+    smoothProgress,
+    handleManualClick
+}: {
+    feature: typeof features[0];
+    index: number;
+    activeFeature: number;
+    smoothProgress: any;
+    handleManualClick: (index: number) => void;
+}) => {
+    const progressHeight = useTransform(
+        smoothProgress,
+        (val: number) => {
+            const stepSize = 1 / features.length;
+            const stepStart = index * stepSize;
+            const stepEnd = (index + 1) * stepSize;
 
-    const runSequence = async () => {
-      while (active) {
-        // Reset
-        setStep(0);
-        setText1Part1("");
-        setText1Part2("");
-        setText2("");
-        await new Promise(r => setTimeout(r, 100));
+            if (val >= stepEnd) return "100%";
+            if (val < stepStart) return "0%";
 
-        // Start
-        if (!active) break;
-        setStep(1); // Container visible
-        await new Promise(r => setTimeout(r, 500));
-
-        if (!active) break;
-        setStep(2); // Header visible
-        await new Promise(r => setTimeout(r, 400));
-
-        // Type Text 1 Part 1
-        if (!active) break;
-        setStep(3);
-        const t1p1 = "Stop losing leads to ";
-        for (let i = 0; i <= t1p1.length; i++) {
-          if (!active) break;
-          setText1Part1(t1p1.slice(0, i));
-          await new Promise(r => setTimeout(r, 30));
+            return `${((val - stepStart) / stepSize) * 100}%`;
         }
+    );
 
-        // Type Text 1 Part 2 (Highlighted)
-        const t1p2 = "creative fatigue";
-        for (let i = 0; i <= t1p2.length; i++) {
-          if (!active) break;
-          setText1Part2(t1p2.slice(0, i));
-          await new Promise(r => setTimeout(r, 30));
-        }
-
-        await new Promise(r => setTimeout(r, 200));
-
-        // Type Text 2
-        if (!active) break;
-        setStep(4);
-        const t2 = "Our new automated hooks lower CPA by 40% instantly. Scale without burnout.";
-        for (let i = 0; i <= t2.length; i++) {
-          if (!active) break;
-          setText2(t2.slice(0, i));
-          await new Promise(r => setTimeout(r, 10));
-        }
-
-        await new Promise(r => setTimeout(r, 300));
-
-        if (!active) break;
-        setStep(5); // Image
-        await new Promise(r => setTimeout(r, 500));
-
-        if (!active) break;
-        setStep(6); // Footer
-        await new Promise(r => setTimeout(r, 4000));
-      }
-    };
-
-    runSequence();
-    return () => { active = false; };
-  }, []);
-
-  return (
-    <div className={`w-full max-w-[300px] bg-surface/90 rounded-xl border border-steel/50 p-5 shadow-2xl backdrop-blur-sm relative overflow-hidden animate-[float_5s_ease-in-out_infinite_delay-700ms] transition-all duration-700 ${step >= 1 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-
-      {/* Header */}
-      <div className={`flex items-center justify-between mb-3 transition-opacity duration-500 ${step >= 2 ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-md bg-gradient-to-br from-brand-blue to-brand-blue-deep shadow-[0_0_10px_rgba(255,107,44,0.4)] backdrop-blur-md border border-white/20" />
-          <div className="h-2 w-16 bg-surface-hover rounded-full" />
-        </div>
-        <div className="text-[9px] text-tertiary font-mono">Emma's ad account</div>
-      </div>
-
-      {/* Text Content */}
-      <div className="space-y-2 mb-3 h-[72px]">
-        <div className="text-[11px] text-secondary leading-relaxed font-medium">
-          {text1Part1}
-          <span className="bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(255,107,44,0.5)]">{text1Part2}</span>
-          {(step === 3) && <span className="inline-block w-1.5 h-3 bg-brand-blue ml-0.5 animate-pulse" />}
-        </div>
-        <div className="text-[10px] text-tertiary leading-relaxed">
-          {text2}
-          {(step === 4) && <span className="inline-block w-1.5 h-3 bg-tertiary ml-0.5 animate-pulse" />}
-        </div>
-      </div>
-
-      {/* Image Block - Premium Generated Ad Visual */}
-      <div className={`w-full h-36 rounded-xl bg-black relative overflow-hidden mb-3 transition-all duration-700 ${step >= 5 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-        {step >= 5 && (
-          <>
-            {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/30 via-black to-brand-blue-deep/30" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,_rgba(255,107,44,0.2),_transparent_50%)]" />
-
-            {/* Subtle Grid Pattern */}
-            <div className="absolute inset-0 opacity-10" style={{
-              backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
-              backgroundSize: '20px 20px'
-            }} />
-
-            {/* Ad Preview Content */}
-            <div className="absolute inset-0 p-4 flex flex-col justify-between">
-              {/* Top - Brand Badge */}
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-brand-blue to-brand-blue-deep shadow-[0_2px_8px_rgba(255,107,44,0.4)] flex items-center justify-center">
-                  <span className="text-white text-[10px] font-bold">C</span>
+    return (
+        <div
+            onClick={() => handleManualClick(index)}
+            className="group cursor-pointer flex gap-6 relative"
+        >
+            <div className="relative pt-1">
+                <div className={`relative w-1.5 rounded-full overflow-hidden transition-all duration-300 ease-out ${activeFeature === index ? 'h-12' : 'h-6'
+                    }`}>
+                    <div className="absolute inset-0 bg-white/10 group-hover:bg-white/20" />
+                    <motion.div
+                        className="absolute bottom-0 left-0 right-0 bg-white shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+                        style={{ height: progressHeight }}
+                    />
                 </div>
-                <span className="text-[9px] text-white/60 font-medium uppercase tracking-wider">Sponsored</span>
-              </div>
-
-              {/* Middle - Hook Text */}
-              <div className="text-center px-2">
-                <p className="text-white text-[13px] font-bold leading-snug drop-shadow-lg">
-                  "Stop losing leads to{' '}
-                  <span className="bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(255,107,44,0.5)]">creative fatigue</span>"
-                </p>
-              </div>
-
-              {/* Bottom - CTA */}
-              <div className="flex justify-center">
-                <div className="px-4 py-1.5 bg-gradient-to-r from-brand-blue to-brand-blue-deep rounded-full text-[9px] text-white font-bold shadow-[0_4px_15px_rgba(255,107,44,0.4)] hover:shadow-[0_4px_20px_rgba(255,107,44,0.6)] transition-shadow flex items-center gap-1.5">
-                  Learn More
-                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </div>
             </div>
 
-            {/* Shimmer Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 animate-[shimmer_2s_infinite]" />
+            <div className="flex-1 pb-2">
+                <h3 className={`text-xl font-medium transition-colors duration-300 ${activeFeature === index ? 'text-white' : 'text-zinc-500 group-hover:text-zinc-300'
+                    }`}>
+                    {feature.title}
+                </h3>
 
-            {/* Corner Accent */}
-            <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-brand-blue/20 to-transparent" />
-          </>
-        )}
-      </div>
-
-      {/* Footer */}
-      <div className={`flex justify-between items-center pt-2 border-t border-white/5 transition-opacity duration-500 ${step >= 6 ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="flex gap-1 items-center">
-          <div className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse" />
-          <span className="text-[9px] text-tertiary">Ready to launch</span>
+                <div className={`overflow-hidden transition-all duration-500 ease-in-out ${activeFeature === index ? 'max-h-[100px] opacity-100 mt-3' : 'max-h-0 opacity-0'
+                    }`}>
+                    <p className="text-[15px] text-zinc-400 leading-relaxed max-w-[90%]">
+                        {feature.description}
+                    </p>
+                </div>
+            </div>
         </div>
-
-        <ShimmerButton
-          className="shadow-lg"
-          background="#FF6B2C"
-          shimmerColor="#FFFFFF"
-          shimmerSize="0.1em"
-          borderRadius="999px"
-          style={{ padding: '4px 12px' }}
-        >
-          <span className="text-white text-[9px] font-bold tracking-wider relative z-10">DEPLOY</span>
-        </ShimmerButton>
-      </div>
-    </div>
-  );
+    );
 };
 
 const ModernCapabilities: React.FC = () => {
-  return (
-    <section className="w-full px-8 lg:px-16 py-32 z-10 bg-transparent relative">
-      {/* Section-specific gradient - centered subtle pulse - Intensified */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_30%,_rgba(255,107,44,0.2),_transparent_70%)] pointer-events-none" />
-      <div className="max-w-[1280px] mx-auto text-center mb-24">
-        <h2 className="text-[48px] lg:text-[72px] font-serif-elegant font-normal tracking-tight leading-[1.05] mb-8 text-primary">
-          How <span className="italic">Callix</span> Works
-        </h2>
-        <p className="text-[16px] text-secondary max-w-[640px] mx-auto leading-relaxed font-light">
-          From raw conversation to ready-to-deploy creative in minutes.
-        </p>
-      </div>
+    const containerRef = useRef<HTMLDivElement>(null);
 
-      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-surface border border-steel/50 rounded-3xl p-5 flex flex-col h-full min-h-[360px] relative overflow-hidden group">
-          {/* Zoom Call Visual - Dark Theme Fading into Card */}
-          <div className="flex-1 flex items-center justify-center relative z-10 py-2">
-            <div className="w-full max-w-[300px] relative">
+    // Track scroll progress through the container
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
+    });
 
-              {/* Top Header - Discovery Call */}
-              <div className="flex items-center justify-between px-4 py-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-white font-semibold text-[11px]">Discovery Call</span>
-                  <span className="text-zinc-500 text-[11px]">|</span>
-                  <span className="text-zinc-500 text-[11px]">12:34</span>
-                </div>
-                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-500/20 border border-red-500/30">
-                  <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                  <span className="text-red-400 text-[9px] font-semibold">REC</span>
-                </div>
-              </div>
+    // Smooth out the progress for better animation
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
 
-              {/* Callix Analyzing Banner */}
-              <div className="mx-4 px-3 py-2 bg-brand-blue/10 rounded-xl flex items-center justify-center gap-2 border border-brand-blue/20 mb-2">
-                <span className="text-[11px] font-semibold bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent transform">Callix is analyzing this call</span>
-                <div className="flex items-center gap-0.5">
-                  <div className="w-1 h-1 rounded-full bg-brand-blue animate-pulse" />
-                  <div className="w-1 h-1 rounded-full bg-brand-blue animate-pulse" style={{ animationDelay: '0.2s' }} />
-                  <div className="w-1 h-1 rounded-full bg-brand-blue animate-pulse" style={{ animationDelay: '0.4s' }} />
-                </div>
-              </div>
+    const [activeFeature, setActiveFeature] = useState(0);
 
-              {/* Video Grid - 2 people side by side */}
-              <div className="px-4 pb-2">
-                <div className="grid grid-cols-2 gap-2">
-                  {/* Participant 1 - Emma */}
-                  <div className="relative aspect-[4/3] bg-zinc-800 rounded-lg overflow-hidden">
-                    <img
-                      src="/emma.jpg"
-                      alt="Emma"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-1.5 left-2">
-                      <span className="text-[9px] text-white font-medium bg-black/50 px-2 py-0.5 rounded-md">Emma</span>
+    // Map scroll progress to features
+    useEffect(() => {
+        const unsubscribe = smoothProgress.on("change", (latest) => {
+            // Divide scroll into 4 sections
+            // We use a slightly adjusted max to ensure we reach the last step comfortably
+            const step = Math.min(Math.floor(latest * features.length), features.length - 1);
+            setActiveFeature(step);
+        });
+        return () => unsubscribe();
+    }, [smoothProgress]);
+
+    // Manual navigation
+    const handleManualClick = (index: number) => {
+        if (!containerRef.current) return;
+        const sectionHeight = containerRef.current.offsetHeight;
+        const windowHeight = window.innerHeight;
+        // Calculate the target scroll position: start of section + (fraction * index)
+        // We subtract a small buffer to ensure we land nicely within the "step"
+        const targetScroll = containerRef.current.offsetTop + ((sectionHeight - windowHeight) / features.length) * index + 10;
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    };
+
+    return (
+        // TALL CONTAINER creates the scroll track (300vh = 3 screens worth of scrolling)
+        <section ref={containerRef} className="relative w-full h-[300vh] bg-transparent">
+
+            {/* STICKY CONTAINER pins the content to the screen */}
+            <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+
+                {/* Ambient Background */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-brand-blue/5 blur-[120px] rounded-full pointer-events-none" />
+
+                <div className="w-full px-4 lg:px-8 py-24 z-10">
+                    <div className="max-w-[1240px] mx-auto">
+
+                        {/* Header Section */}
+                        <div className="flex flex-col items-center text-center mb-16">
+                            <div className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6 inline-flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span>
+                                <span className="text-[11px] font-semibold tracking-widest uppercase text-tertiary">How Callix Works</span>
+                            </div>
+
+                            <h2 className="text-4xl lg:text-5xl font-medium tracking-tight text-white max-w-3xl leading-[1.15]">
+                                What if your ads could learn from <br className="hidden md:block" />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-blue-light to-white">your best sales calls?</span>
+                            </h2>
+                        </div>
+
+                        {/* Main Content Grid */}
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 rounded-[32px] md:p-0 backdrop-blur-sm">
+
+                            {/* Left Column: Feature List */}
+                            <div className="lg:col-span-5 flex flex-col justify-center pl-4 lg:pl-8">
+                                <div className="space-y-8 relative">
+                                    {features.map((feature, index) => (
+                                        <FeatureItem
+                                            key={feature.id}
+                                            feature={feature}
+                                            index={index}
+                                            activeFeature={activeFeature}
+                                            smoothProgress={smoothProgress}
+                                            handleManualClick={handleManualClick}
+                                        />
+                                    ))}
+                                </div>
+
+                                {/* Primary CTA */}
+                                <div className="mt-12 pl-0">
+                                    <ShimmerButton
+                                        className="shadow-2xl"
+                                        background="#FFFFFF"
+                                        shimmerColor="#FF6B2C"
+                                        shimmerSize="0.1em"
+                                        borderRadius="999px"
+                                        style={{ padding: '16px 32px' }}
+                                    >
+                                        <span className="text-white text-sm font-bold tracking-wide">Learn more</span>
+                                    </ShimmerButton>
+                                    <p className="text-[11px] text-zinc-500 mt-4 max-w-xs leading-snug">
+                                        * On average brands see at least a 15% increase in ad revenue by applying Callix tracking
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Right Column: Visual Area */}
+                            <div className="lg:col-span-7 h-[400px] lg:h-[450px] relative">
+                                <div className="w-full h-full rounded-2xl overflow-hidden relative">
+                                    {/* Abstract Background - Consistent with TrackingCapabilities */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 to-black rounded-2xl border border-white/5" />
+
+                                    {/* Visual Content Switcher */}
+                                    <AnimatePresence mode="wait">
+                                        {activeFeature === 0 && (
+                                            <motion.div
+                                                key="step1"
+                                                initial={{ opacity: 0, scale: 0.95 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                exit={{ opacity: 0, scale: 0.95 }}
+                                                transition={{ duration: 0.4 }}
+                                                className="absolute inset-0 flex items-center justify-center p-8"
+                                            >
+                                                <div className="relative w-full max-w-2xl aspect-video bg-[#202124] rounded-lg overflow-hidden flex flex-col shadow-2xl border border-[#3C4043]">
+                                                    {/* Top Bar */}
+                                                    <div className="h-12 flex items-center justify-between px-4">
+                                                        <div className="flex items-center gap-3">
+                                                            <div className="text-white font-medium text-sm tracking-wide">
+                                                                10:45 AM
+                                                            </div>
+                                                            <div className="text-[#9aa0a6] text-sm">
+                                                                |
+                                                            </div>
+                                                            <div className="text-[#9aa0a6] text-sm font-medium">
+                                                                cix-call-mtg
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="flex items-center gap-2 bg-[#E8F0FE] px-4 py-1.5 rounded-full shadow-sm">
+                                                                <div className="w-2 h-2 rounded-full bg-[#FF6B2C]" />
+                                                                <span className="text-[13px] font-semibold text-[#FF6B2C] tracking-tight">Callix is taking notes</span>
+                                                            </div>
+                                                            <div className="w-8 h-8 rounded-full hover:bg-[#3C4043] flex items-center justify-center cursor-pointer transition-colors">
+                                                                <LayoutGrid className="w-5 h-5 text-white" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Video Grid */}
+                                                    <div className="flex-1 flex px-4 gap-4 min-h-0 pb-2">
+                                                        {/* Sales Rep */}
+                                                        <div className="flex-1 bg-[#3C4043] rounded-lg relative overflow-hidden group/video">
+                                                            <img
+                                                                src="/john.jpg"
+                                                                alt="Sales Rep"
+                                                                className="w-full h-full object-cover"
+                                                            />
+                                                            <div className="absolute inset-0 bg-black/0 group-hover/video:bg-black/20 transition-colors" />
+                                                            <div className="absolute bottom-3 left-3 text-white text-xs font-medium bg-black/40 px-2 py-1 rounded backdrop-blur-sm">
+                                                                John
+                                                            </div>
+                                                            <div className="absolute top-3 right-3 bg-[#3C4043] p-1.5 rounded-full">
+                                                                <div className="w-1.5 h-3 flex items-end gap-0.5">
+                                                                    <div className="w-0.5 bg-green-500 h-2 animate-[bounce_1s_infinite]" />
+                                                                    <div className="w-0.5 bg-green-500 h-3 animate-[bounce_1.2s_infinite]" />
+                                                                    <div className="w-0.5 bg-green-500 h-1.5 animate-[bounce_0.8s_infinite]" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Prospect */}
+                                                        <div className="flex-1 bg-[#3C4043] rounded-lg relative overflow-hidden group/video">
+                                                            <img
+                                                                src="/emma.jpg"
+                                                                alt="Prospect"
+                                                                className="w-full h-full object-cover"
+                                                            />
+                                                            <div className="absolute inset-0 bg-black/0 group-hover/video:bg-black/20 transition-colors" />
+                                                            <div className="absolute bottom-3 left-3 text-white text-xs font-medium bg-black/40 px-2 py-1 rounded backdrop-blur-sm">
+                                                                Sarah Miller
+                                                            </div>
+                                                            <div className="absolute top-3 right-3 bg-black/40 p-1.5 rounded-full backdrop-blur-sm">
+                                                                <Mic className="w-3 h-3 text-white" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Bottom Controls */}
+                                                    <div className="h-16 flex items-center justify-between px-4 pb-2">
+                                                        <div className="text-white text-xs font-medium min-w-[100px]">
+
+                                                        </div>
+
+                                                        <div className="flex items-center gap-3">
+                                                            {/* Mic */}
+                                                            <button className="w-10 h-10 rounded-full bg-[#3C4043] hover:bg-[#474a4d] flex items-center justify-center transition-colors group">
+                                                                <Mic className="w-5 h-5 text-white" />
+                                                            </button>
+                                                            {/* Camera */}
+                                                            <button className="w-10 h-10 rounded-full bg-[#3C4043] hover:bg-[#474a4d] flex items-center justify-center transition-colors">
+                                                                <Video className="w-5 h-5 text-white" />
+                                                            </button>
+                                                            {/* Hand */}
+                                                            <button className="w-10 h-10 rounded-full bg-[#3C4043] hover:bg-[#474a4d] flex items-center justify-center transition-colors hidden sm:flex">
+                                                                <Hand className="w-5 h-5 text-white" />
+                                                            </button>
+                                                            {/* Present */}
+                                                            <button className="w-10 h-10 rounded-full bg-[#3C4043] hover:bg-[#474a4d] flex items-center justify-center transition-colors hidden sm:flex">
+                                                                <MonitorUp className="w-5 h-5 text-white" />
+                                                            </button>
+                                                            {/* More */}
+                                                            <button className="w-10 h-10 rounded-full bg-[#3C4043] hover:bg-[#474a4d] flex items-center justify-center transition-colors hidden sm:flex">
+                                                                <MoreVertical className="w-5 h-5 text-white" />
+                                                            </button>
+                                                            {/* End Call */}
+                                                            <button className="w-12 h-10 rounded-full bg-[#EA4335] hover:bg-[#D93025] flex items-center justify-center transition-colors px-4">
+                                                                <PhoneOff className="w-5 h-5 text-white fill-white" />
+                                                            </button>
+                                                        </div>
+
+                                                        <div className="flex items-center gap-3 min-w-[100px] justify-end">
+                                                            <button className="w-10 h-10 hover:bg-[#3C4043] rounded-full flex items-center justify-center transition-colors">
+                                                                <Info className="w-5 h-5 text-white" />
+                                                            </button>
+                                                            <button className="w-10 h-10 hover:bg-[#3C4043] rounded-full flex items-center justify-center transition-colors hidden sm:flex">
+                                                                <Users className="w-5 h-5 text-white" />
+                                                            </button>
+                                                            <button className="w-10 h-10 hover:bg-[#3C4043] rounded-full flex items-center justify-center transition-colors hidden sm:flex">
+                                                                <MessageSquare className="w-5 h-5 text-white" />
+                                                            </button>
+                                                            <button className="w-10 h-10 hover:bg-[#3C4043] rounded-full flex items-center justify-center transition-colors">
+                                                                <div className="w-0 h-0 border-l-[5px] border-l-transparent border-t-[6px] border-t-white border-r-[5px] border-r-transparent ml-0.5 mt-0.5" />
+                                                                <div className="w-3 h-3 bg-transparent border-2 border-white rounded-sm -ml-2 -mt-2" />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        )}
+
+                                        {activeFeature === 2 && (
+                                            <motion.div
+                                                key="step2"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                transition={{ duration: 0.4 }}
+                                                className="absolute inset-0 flex items-center justify-center p-8"
+                                            >
+                                                <div className="w-full h-full relative group flex flex-col items-center justify-center">
+
+                                                    {/* Electrical circuit background */}
+                                                    <svg
+                                                        className="absolute inset-0 w-full h-full"
+                                                        viewBox="0 0 400 400"
+                                                        preserveAspectRatio="xMidYMid slice"
+                                                    >
+                                                        <defs>
+                                                            <linearGradient id="electricBlue" x1="0%" y1="50%" x2="100%" y2="50%">
+                                                                <stop offset="0%" stopColor="#FF6B2C" stopOpacity="0" />
+                                                                <stop offset="30%" stopColor="#FF6B2C" stopOpacity="0.6" />
+                                                                <stop offset="50%" stopColor="#C2410C" stopOpacity="1" />
+                                                                <stop offset="70%" stopColor="#FF6B2C" stopOpacity="0.6" />
+                                                                <stop offset="100%" stopColor="#FF6B2C" stopOpacity="0" />
+                                                            </linearGradient>
+
+                                                            <linearGradient id="electricSilver" x1="0%" y1="50%" x2="100%" y2="50%">
+                                                                <stop offset="0%" stopColor="#e2e8f0" stopOpacity="0" />
+                                                                <stop offset="20%" stopColor="#f1f5f9" stopOpacity="0.7" />
+                                                                <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
+                                                                <stop offset="80%" stopColor="#f1f5f9" stopOpacity="0.7" />
+                                                                <stop offset="100%" stopColor="#e2e8f0" stopOpacity="0" />
+                                                            </linearGradient>
+
+                                                            <linearGradient id="electricSilverV" x1="50%" y1="0%" x2="50%" y2="100%">
+                                                                <stop offset="0%" stopColor="#cbd5e1" />
+                                                                <stop offset="25%" stopColor="#f8fafc" />
+                                                                <stop offset="50%" stopColor="#94a3b8" />
+                                                                <stop offset="75%" stopColor="#e2e8f0" />
+                                                                <stop offset="100%" stopColor="#64748b" />
+                                                            </linearGradient>
+
+                                                            <filter id="electricGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                                                <feGaussianBlur stdDeviation="3" result="blur" />
+                                                                <feMerge>
+                                                                    <feMergeNode in="blur" />
+                                                                    <feMergeNode in="SourceGraphic" />
+                                                                </feMerge>
+                                                            </filter>
+
+                                                            <filter id="silverGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                                                <feGaussianBlur stdDeviation="2" result="blur" />
+                                                                <feMerge>
+                                                                    <feMergeNode in="blur" />
+                                                                    <feMergeNode in="SourceGraphic" />
+                                                                </feMerge>
+                                                            </filter>
+                                                        </defs>
+
+                                                        {/* Background soft glow - Silver */}
+                                                        <g filter="url(#silverGlow)">
+                                                            <path d="M0,200 L120,200 L140,180 L160,180 L180,200 L200,200" stroke="url(#electricSilver)" strokeWidth="2" fill="none" opacity="0.3" />
+                                                            <path d="M400,200 L280,200 L260,220 L240,220 L220,200 L200,200" stroke="url(#electricSilver)" strokeWidth="2" fill="none" opacity="0.3" />
+                                                            {/* Diagonal Background Hints */}
+                                                            <path d="M100,100 L180,180" stroke="url(#electricSilver)" strokeWidth="2" fill="none" opacity="0.3" />
+                                                            <path d="M300,100 L220,180" stroke="url(#electricSilver)" strokeWidth="2" fill="none" opacity="0.3" />
+
+                                                            {/* Bottom Middle Vertical Extension - Metallic */}
+                                                            <path d="M200,400 L200,300 L220,280 L220,100" stroke="url(#electricSilverV)" strokeWidth="2" fill="none" opacity="0.6" />
+                                                        </g>
+
+                                                        {/* Main electrical paths - Blue (Orange in definition) */}
+                                                        <g filter="url(#electricGlow)">
+                                                            <path d="M0,200 L100,200 L120,180 L140,180" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.7">
+                                                                <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="3s" repeatCount="indefinite" />
+                                                            </path>
+                                                            <path d="M400,200 L300,200 L280,220 L260,220" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.7">
+                                                                <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="3s" repeatCount="indefinite" />
+                                                            </path>
+
+                                                            {/* Diagonal Feeders Connecting to X */}
+                                                            <path d="M80,80 L160,160" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.6">
+                                                                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2.5s" repeatCount="indefinite" />
+                                                            </path>
+                                                            <path d="M320,80 L240,160" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.6">
+                                                                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2.7s" repeatCount="indefinite" />
+                                                            </path>
+                                                            <path d="M80,320 L160,240" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.6">
+                                                                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2.9s" repeatCount="indefinite" />
+                                                            </path>
+                                                            <path d="M320,320 L240,240" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.6">
+                                                                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="3.1s" repeatCount="indefinite" />
+                                                            </path>
+                                                        </g>
+
+                                                        {/* Silver metallic paths */}
+                                                        <g filter="url(#silverGlow)">
+                                                            <path d="M0,170 L80,170 L100,190 L120,190" stroke="url(#electricSilver)" strokeWidth="1" fill="none" opacity="0.6">
+                                                                <animate attributeName="stroke-dasharray" values="0,180;180,0;0,180" dur="2.5s" repeatCount="indefinite" />
+                                                            </path>
+                                                            <path d="M400,170 L320,170 L300,190 L280,190" stroke="url(#electricSilver)" strokeWidth="1" fill="none" opacity="0.6">
+                                                                <animate attributeName="stroke-dasharray" values="0,180;180,0;0,180" dur="2.5s" repeatCount="indefinite" />
+                                                            </path>
+                                                            <path d="M200,0 L200,100 L180,120 L180,140" stroke="url(#electricSilverV)" strokeWidth="1.5" fill="none" opacity="0.5">
+                                                                <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="3.2s" repeatCount="indefinite" />
+                                                            </path>
+                                                            <path d="M200,400 L200,300 L220,280 L220,260" stroke="url(#electricSilverV)" strokeWidth="1.5" fill="none" opacity="0.5">
+                                                                <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="3.2s" repeatCount="indefinite" />
+                                                            </path>
+                                                        </g>
+
+                                                        {/* New Connections to Platforms - Blue/Orange */}
+                                                        <g filter="url(#electricGlow)">
+                                                            {/* Path to Meta (Top Left) */}
+                                                            <path d="M140,140 L100,100 L60,100" stroke="url(#electricBlue)" strokeWidth="2" fill="none" opacity="0.8">
+                                                                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2s" repeatCount="indefinite" />
+                                                            </path>
+                                                            {/* Path to Google Ads (Top Right) */}
+                                                            <path d="M260,140 L300,100 L340,100" stroke="url(#electricBlue)" strokeWidth="2" fill="none" opacity="0.8">
+                                                                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2.2s" repeatCount="indefinite" />
+                                                            </path>
+                                                            {/* Path to LinkedIn (Bottom Left) */}
+                                                            <path d="M140,260 L100,300 L60,300" stroke="url(#electricBlue)" strokeWidth="2" fill="none" opacity="0.8">
+                                                                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2.4s" repeatCount="indefinite" />
+                                                            </path>
+                                                            {/* Path to YouTube (Bottom Right) */}
+                                                            <path d="M260,260 L300,300 L340,300" stroke="url(#electricBlue)" strokeWidth="2" fill="none" opacity="0.8">
+                                                                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2.6s" repeatCount="indefinite" />
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+
+                                                    {/* Platform Nodes */}
+                                                    <div className="absolute inset-0 z-20 pointer-events-none">
+                                                        {/* Meta Node (Top Left) */}
+                                                        <div className="absolute top-[20%] left-[10%] w-16 h-16 bg-black/80 rounded-xl border border-white/10 flex items-center justify-center p-3 backdrop-blur-md shadow-[0_0_15px_rgba(255,107,44,0.3)]">
+                                                            <img src="/logos/meta.png" alt="Meta" className="w-full h-full object-contain" />
+                                                        </div>
+
+                                                        {/* Google Ads Node (Top Right) */}
+                                                        <div className="absolute top-[20%] right-[10%] w-16 h-16 bg-black/80 rounded-xl border border-white/10 flex items-center justify-center p-3 backdrop-blur-md shadow-[0_0_15px_rgba(255,107,44,0.3)]">
+                                                            <img src="/logos/google_ads.png" alt="Google Ads" className="w-full h-full object-contain" />
+                                                        </div>
+
+                                                        {/* LinkedIn Node (Bottom Left) */}
+                                                        <div className="absolute bottom-[20%] left-[10%] w-16 h-16 bg-black/80 rounded-xl border border-white/10 flex items-center justify-center p-3 backdrop-blur-md shadow-[0_0_15px_rgba(255,107,44,0.3)]">
+                                                            <img src="/logos/linkedin.png" alt="LinkedIn" className="w-full h-full object-contain" />
+                                                        </div>
+
+                                                        {/* YouTube Node (Bottom Right) */}
+                                                        <div className="absolute bottom-[20%] right-[10%] w-16 h-16 bg-black/80 rounded-xl border border-white/10 flex items-center justify-center p-3 backdrop-blur-md shadow-[0_0_15px_rgba(255,107,44,0.3)]">
+                                                            <Youtube className="w-6 h-6 text-white text-red-500 fill-current" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex-1 flex flex-col items-center justify-center relative z-10">
+                                                        <div className="relative group/x">
+                                                            <div className="absolute inset-0 bg-brand-blue/20 blur-[60px] rounded-full group-hover/x:bg-brand-blue/30 transition-all duration-500" />
+                                                            <div className="relative z-10 flex items-center justify-center">
+                                                                {/* Image X Logo */}
+                                                                <img
+                                                                    src="/silver-x.png"
+                                                                    alt="AI Psychology"
+                                                                    className="w-[220px] h-[220px] object-contain drop-shadow-2xl relative z-20 mt-20"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </motion.div>
+                                        )}
+
+                                        {activeFeature === 1 && (
+                                            <motion.div
+                                                key="step2"
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: -20 }}
+                                                transition={{ duration: 0.4 }}
+                                                className="absolute inset-0 flex items-center justify-center p-8"
+                                            >
+                                                {/* Glowing Card Container */}
+                                                <div className="relative w-full max-w-[380px] bg-[#0F0F11] border border-white/10 rounded-3xl p-6 shadow-2xl">
+                                                    {/* Ambient Glow */}
+                                                    <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/10 blur-[50px] rounded-full pointer-events-none" />
+                                                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#FF6B2C]/5 blur-[50px] rounded-full pointer-events-none" />
+
+                                                    {/* Header */}
+                                                    <div className="flex items-center gap-4 mb-8 relative z-10">
+                                                        <div className="relative">
+                                                            <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-white/10">
+                                                                <img src="/emma.jpg" alt="Prospect" className="w-full h-full object-cover" />
+                                                            </div>
+                                                            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-[#000] rounded-full flex items-center justify-center border border-white/10">
+                                                                <Video className="w-3 h-3 text-white" />
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <h3 className="text-white font-semibold text-lg">Sarah Miller</h3>
+                                                            <p className="text-zinc-500 text-xs font-medium uppercase tracking-wide">Vice President • 42m Call</p>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Extraction List */}
+                                                    <div className="space-y-4 relative z-10">
+                                                        {/* Item 1 */}
+                                                        <div className="group flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                                                            <div className="mt-1 w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center text-green-500 shadow-[0_0_10px_rgba(34,197,94,0.2)]">
+                                                                <CheckCircle className="w-4 h-4" />
+                                                            </div>
+                                                            <div>
+                                                                <div className="text-white text-sm font-medium">Budget Confirmed</div>
+                                                                <div className="text-zinc-500 text-xs">$50k - $75k allocated for Q1</div>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Item 2 */}
+                                                        <div className="group flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                                                            <div className="mt-1 w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center text-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.2)]">
+                                                                <AlertCircle className="w-4 h-4" />
+                                                            </div>
+                                                            <div>
+                                                                <div className="text-white text-sm font-medium">Objection Detected</div>
+                                                                <div className="text-zinc-500 text-xs">Currently evaluating Gong</div>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Item 3 */}
+                                                        <div className="group flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                                                            <div className="mt-1 w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.2)]">
+                                                                <Calendar className="w-4 h-4" />
+                                                            </div>
+                                                            <div>
+                                                                <div className="text-white text-sm font-medium">Next Steps</div>
+                                                                <div className="text-zinc-500 text-xs">Technical demo scheduled for Tues</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Floating Score Badge */}
+                                                    <motion.div
+                                                        initial={{ scale: 0.9, opacity: 0 }}
+                                                        animate={{ scale: 1, opacity: 1 }}
+                                                        transition={{ delay: 0.2 }}
+                                                        className="absolute -right-6 top-20 bg-[#000] border border-[#FF6B2C]/50 shadow-[0_0_20px_rgba(255,107,44,0.3)] p-4 rounded-xl flex flex-col items-center gap-1 rotate-3"
+                                                    >
+                                                        <div className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">Lead Score</div>
+                                                        <div className="text-2xl font-bold text-white flex items-center gap-1">
+                                                            92
+                                                            <span className="text-sm text-zinc-500 font-normal">/100</span>
+                                                        </div>
+                                                    </motion.div>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                        {activeFeature === 3 && (
+                                            <motion.div
+                                                key="step3"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                transition={{ duration: 0.4 }}
+                                                className="absolute inset-0 flex items-center justify-center gap-4 p-4"
+                                            >
+                                                {/* Video Ad (Left Card) */}
+                                                <motion.div
+                                                    initial={{ x: -20, opacity: 0 }}
+                                                    animate={{ x: 0, opacity: 1 }}
+                                                    transition={{ delay: 0.1 }}
+                                                    className="relative w-[230px] h-[400px] bg-black rounded-xl overflow-hidden shadow-2xl border border-white/10"
+                                                >
+                                                    {/* Image Content Container */}
+                                                    <div className="relative w-full h-full group cursor-pointer" onClick={(e) => {
+                                                        const overlay = e.currentTarget.querySelector('.play-overlay');
+                                                        if (overlay) {
+                                                            overlay.classList.add('opacity-0', 'pointer-events-none');
+                                                        }
+                                                    }}>
+                                                        {/* Instagram Header Overlay */}
+                                                        <div className="absolute top-0 left-0 right-0 h-14 bg-gradient-to-b from-black/60 to-transparent z-20 flex items-center px-3 gap-2">
+                                                            <div className="w-7 h-7 rounded-full border border-white/20 overflow-hidden">
+                                                                <img src="/logos/meta.png" alt="Profile" className="w-full h-full object-cover bg-white" />
+                                                            </div>
+                                                            <div>
+                                                                <div className="text-white text-xs font-semibold flex items-center gap-1 shadow-black drop-shadow-md">
+                                                                    marissaren <span className="text-blue-400 text-[10px]">✓</span>
+                                                                </div>
+                                                                <div className="text-white/80 text-[9px] shadow-black drop-shadow-md">Sponsored • UGC Ad</div>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Main Image/Video */}
+                                                        <img src="/ad_video_thumb.png" alt="Video Ad" className="w-full h-full object-cover" />
+
+                                                        {/* Play Button Overlay */}
+                                                        <div className="play-overlay absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-all duration-300 z-10">
+                                                            <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-xl group-hover:scale-110 transition-transform">
+                                                                <div className="w-0 h-0 border-l-[10px] border-l-white border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent ml-1" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </motion.div>
+
+                                                {/* Static Ad (Right Card) */}
+                                                <motion.div
+                                                    initial={{ x: 20, opacity: 0 }}
+                                                    animate={{ x: 0, opacity: 1 }}
+                                                    transition={{ delay: 0.2 }}
+                                                    className="relative w-[230px] h-[400px] bg-white rounded-xl overflow-hidden shadow-2xl border border-white/10"
+                                                >
+                                                    {/* Mock Instagram Header */}
+                                                    <div className="h-12 flex items-center px-3 gap-2 bg-white/90 border-b border-zinc-100 absolute top-0 left-0 right-0 z-10">
+                                                        <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-yellow-400 to-purple-500 p-[2px]">
+                                                            <div className="w-full h-full rounded-full bg-white p-[2px]">
+                                                                <div className="w-full h-full rounded-full bg-zinc-200" />
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="text-black text-xs font-semibold flex items-center gap-1">
+                                                                tryarmra <span className="text-blue-500 text-[10px]">✓</span>
+                                                            </div>
+                                                            <div className="text-zinc-500 text-[9px]">Sponsored</div>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/ad_static.png" alt="Static Ad" className="w-full h-full object-cover mt-12" />
+                                                </motion.div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                  </div>
-
-                  {/* Participant 2 - John (with orange border) */}
-                  <div className="relative aspect-[4/3] bg-zinc-800 rounded-lg overflow-hidden ring-1 ring-brand-blue">
-                    <img
-                      src="/john.jpg"
-                      alt="John"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-1.5 left-2">
-                      <span className="text-[9px] text-white font-medium bg-black/50 px-2 py-0.5 rounded-md">John</span>
-                    </div>
-                  </div>
                 </div>
-              </div>
-
-              {/* Bottom Controls */}
-              <div className="flex items-center justify-center gap-2 px-4 py-2">
-                <div className="w-8 h-8 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all cursor-pointer">
-                  <svg className="w-3 h-3 text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
-                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
-                  </svg>
-                </div>
-                <div className="w-8 h-8 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all cursor-pointer">
-                  <svg className="w-3 h-3 text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
-                  </svg>
-                </div>
-                <div className="w-8 h-8 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all cursor-pointer">
-                  <svg className="w-3 h-3 text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-                  </svg>
-                </div>
-                <button className="px-4 py-2 rounded-full bg-red-500 text-white font-semibold text-[11px] flex items-center gap-1.5 shadow-lg hover:bg-red-600 transition-colors">
-                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.73-1.68-1.36-2.66-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z" />
-                  </svg>
-                  Leave
-                </button>
-              </div>
-
-              {/* Fade edges to blend with card */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-surface to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-surface to-transparent" />
-                <div className="absolute top-0 bottom-0 left-0 w-3 bg-gradient-to-r from-surface to-transparent" />
-                <div className="absolute top-0 bottom-0 right-0 w-3 bg-gradient-to-l from-surface to-transparent" />
-              </div>
             </div>
-          </div>
-
-          <div className="mt-4 relative z-10">
-            <h3 className="text-[16px] font-semibold mb-2 text-primary">Capture Every Call</h3>
-            <p className="text-secondary text-[13px] leading-relaxed">Connect in one click. Every call is recorded, transcribed, and analyzed instantly with perfect accuracy.</p>
-          </div>
-        </div>
-
-        <div className="bg-surface border border-steel/50 rounded-3xl p-5 flex flex-col h-full min-h-[360px] relative overflow-hidden group">
-          {/* Electrical circuit SVG effect behind X - Silver & Orange */}
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
-            <defs>
-              {/* Blue electrical gradient */}
-              <linearGradient id="electricBlue" x1="0%" y1="50%" x2="100%" y2="50%">
-                <stop offset="0%" stopColor="#FF6B2C" stopOpacity="0" />
-                <stop offset="30%" stopColor="#FF6B2C" stopOpacity="0.6" />
-                <stop offset="50%" stopColor="#C2410C" stopOpacity="1" />
-                <stop offset="70%" stopColor="#FF6B2C" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#FF6B2C" stopOpacity="0" />
-              </linearGradient>
-              {/* Silver/Chrome metallic gradient */}
-              <linearGradient id="electricSilver" x1="0%" y1="50%" x2="100%" y2="50%">
-                <stop offset="0%" stopColor="#e2e8f0" stopOpacity="0" />
-                <stop offset="20%" stopColor="#f1f5f9" stopOpacity="0.7" />
-                <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
-                <stop offset="80%" stopColor="#f1f5f9" stopOpacity="0.7" />
-                <stop offset="100%" stopColor="#e2e8f0" stopOpacity="0" />
-              </linearGradient>
-              {/* Vertical blue */}
-              <linearGradient id="electricBlueV" x1="50%" y1="0%" x2="50%" y2="100%">
-                <stop offset="0%" stopColor="#FF6B2C" stopOpacity="0" />
-                <stop offset="50%" stopColor="#C2410C" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#FF6B2C" stopOpacity="0" />
-              </linearGradient>
-              {/* Vertical silver */}
-              <linearGradient id="electricSilverV" x1="50%" y1="0%" x2="50%" y2="100%">
-                <stop offset="0%" stopColor="#e2e8f0" stopOpacity="0" />
-                <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
-                <stop offset="100%" stopColor="#e2e8f0" stopOpacity="0" />
-              </linearGradient>
-              {/* X Metallic Gradient */}
-              <linearGradient id="xMetal" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#cbd5e1" />
-                <stop offset="25%" stopColor="#f8fafc" />
-                <stop offset="50%" stopColor="#94a3b8" />
-                <stop offset="75%" stopColor="#e2e8f0" />
-                <stop offset="100%" stopColor="#64748b" />
-              </linearGradient>
-              {/* Glow filters */}
-              <filter id="electricGlow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-              <filter id="silverGlow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="2" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-
-            {/* Background soft glow - Silver */}
-            <g filter="url(#silverGlow)">
-              <path d="M0,200 L120,200 L140,180 L160,180 L180,200 L200,200" stroke="url(#electricSilver)" strokeWidth="2" fill="none" opacity="0.3" />
-              <path d="M400,200 L280,200 L260,220 L240,220 L220,200 L200,200" stroke="url(#electricSilver)" strokeWidth="2" fill="none" opacity="0.3" />
-              {/* Diagonal Background Hints */}
-              <path d="M100,100 L180,180" stroke="url(#electricSilver)" strokeWidth="2" fill="none" opacity="0.3" />
-              <path d="M300,100 L220,180" stroke="url(#electricSilver)" strokeWidth="2" fill="none" opacity="0.3" />
-
-              {/* Bottom Middle Vertical Extension - Metallic */}
-              <path d="M200,400 L200,300 L220,280 L220,100" stroke="url(#electricSilverV)" strokeWidth="2" fill="none" opacity="0.6" />
-            </g>
-
-            {/* Main electrical paths - Blue */}
-            <g filter="url(#electricGlow)">
-              <path d="M0,200 L100,200 L120,180 L140,180" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.7">
-                <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="3s" repeatCount="indefinite" />
-              </path>
-              <path d="M400,200 L300,200 L280,220 L260,220" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.7">
-                <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="3s" repeatCount="indefinite" />
-              </path>
-
-              {/* Diagonal Feeders Connecting to X */}
-              <path d="M80,80 L160,160" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.6">
-                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2.5s" repeatCount="indefinite" />
-              </path>
-              <path d="M320,80 L240,160" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.6">
-                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2.7s" repeatCount="indefinite" />
-              </path>
-              <path d="M80,320 L160,240" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.6">
-                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="2.9s" repeatCount="indefinite" />
-              </path>
-              <path d="M320,320 L240,240" stroke="url(#electricBlue)" strokeWidth="1.5" fill="none" opacity="0.6">
-                <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="3.1s" repeatCount="indefinite" />
-              </path>
-            </g>
-
-            {/* Silver metallic paths */}
-            <g filter="url(#silverGlow)">
-              <path d="M0,170 L80,170 L100,190 L120,190" stroke="url(#electricSilver)" strokeWidth="1" fill="none" opacity="0.6">
-                <animate attributeName="stroke-dasharray" values="0,180;180,0;0,180" dur="2.5s" repeatCount="indefinite" />
-              </path>
-              <path d="M400,170 L320,170 L300,190 L280,190" stroke="url(#electricSilver)" strokeWidth="1" fill="none" opacity="0.6">
-                <animate attributeName="stroke-dasharray" values="0,180;180,0;0,180" dur="2.5s" repeatCount="indefinite" />
-              </path>
-              <path d="M200,0 L200,100 L180,120 L180,140" stroke="url(#electricSilverV)" strokeWidth="1.5" fill="none" opacity="0.5">
-                <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="3.2s" repeatCount="indefinite" />
-              </path>
-              <path d="M200,400 L200,300 L220,280 L220,260" stroke="url(#electricSilverV)" strokeWidth="1.5" fill="none" opacity="0.5">
-                <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="3.2s" repeatCount="indefinite" />
-              </path>
-            </g>
-          </svg>
-
-          <div className="flex-1 flex flex-col items-center justify-center relative z-10">
-            <div className="relative group/x">
-              <div className="absolute inset-0 bg-brand-blue/20 blur-[60px] rounded-full group-hover/x:bg-brand-blue/30 transition-all duration-500" />
-              <div className="relative z-10 flex items-center justify-center">
-                {/* Image X Logo */}
-                <img
-                  src="/silver-x.png"
-                  alt="AI Psychology"
-                  className="w-[220px] h-[220px] object-contain drop-shadow-2xl relative z-20 mt-20"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="mt-8 relative z-10">
-            <h3 className="text-[16px] font-semibold mb-2 text-primary">AI Extracts Psychology</h3>
-            <p className="text-secondary text-[13px] leading-relaxed">Our engine identifies who converts, why they act, and what triggers kill intent before you lose a lead.</p>
-          </div>
-        </div>
-
-        <div className="bg-surface border border-steel/50 rounded-3xl p-5 flex flex-col h-full min-h-[360px] relative overflow-hidden group">
-          {/* Background Upload Effect */}
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
-            <defs>
-              <linearGradient id="deployGradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                <stop offset="0%" stopColor="#FF6B2C" stopOpacity="0" />
-                <stop offset="50%" stopColor="#FF6B2C" stopOpacity="0.3" />
-                <stop offset="100%" stopColor="#FF6B2C" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            {/* Rising Data Lines */}
-            <g opacity="0.4">
-              <path d="M100,450 L100,-50" stroke="url(#deployGradient)" strokeWidth="1" strokeDasharray="4 8">
-                <animate attributeName="stroke-dashoffset" from="0" to="-12" dur="1s" repeatCount="indefinite" />
-              </path>
-              <path d="M200,450 L200,-50" stroke="url(#deployGradient)" strokeWidth="1" strokeDasharray="4 8">
-                <animate attributeName="stroke-dashoffset" from="0" to="-12" dur="1.5s" repeatCount="indefinite" />
-              </path>
-              <path d="M300,450 L300,-50" stroke="url(#deployGradient)" strokeWidth="1" strokeDasharray="4 8">
-                <animate attributeName="stroke-dashoffset" from="0" to="-12" dur="1.2s" repeatCount="indefinite" />
-              </path>
-            </g>
-          </svg>
-
-          {/* Generated Ad Visual */}
-          <div className="flex-1 flex items-center justify-center relative z-10 py-6">
-            <div className="scale-90 origin-center">
-              <GeneratedAdVisual />
-            </div>
-          </div>
-
-          <div className="mt-4 relative z-10">
-            <h3 className="text-[16px] font-semibold mb-2 text-primary">Deploy Insights Into Ads</h3>
-            <p className="text-secondary text-[13px] leading-relaxed">Turn signals into ready-to-run ad copy, video scripts, and messaging backed by real conversations.</p>
-          </div>
-        </div>
-      </div >
-    </section >
-  );
+        </section>
+    );
 };
 
 export default ModernCapabilities;

@@ -7,22 +7,30 @@ const IntelligentTools: React.FC = () => {
   const comparison = [
     { feature: "Summarizes Calls", callix: true, chatgpt: true, fireflies: true, gong: true, hyros: false, chorus: true, arcads: false },
     { feature: "Identifies Buyer Signals", callix: true, chatgpt: true, fireflies: false, gong: true, hyros: true, chorus: false, arcads: false },
-    { feature: "Generate Ads Automatically", callix: true, chatgpt: false, fireflies: false, gong: false, hyros: false, chorus: false, arcads: true },
+    { feature: "Generates Ads Automatically", callix: true, chatgpt: false, fireflies: false, gong: false, hyros: false, chorus: false, arcads: true },
     { feature: "Forecasts Lead Quality", callix: true, chatgpt: false, fireflies: false, gong: true, hyros: true, chorus: false, arcads: false },
-    { feature: "For High Ticket GTM Teams", callix: true, chatgpt: false, fireflies: false, gong: true, hyros: false, chorus: false, arcads: false },
     { feature: "Pixel Optimization", callix: true, chatgpt: false, fireflies: false, gong: false, hyros: true, chorus: false, arcads: false },
-    { feature: "Live Budget Allocation", callix: true, chatgpt: false, fireflies: false, gong: false, hyros: false, chorus: false, arcads: false },
-    { feature: "Sales Team Performance Coaching", callix: true, chatgpt: false, fireflies: false, gong: true, hyros: false, chorus: true, arcads: false },
-    { feature: "Aligns Sales & Marketing Teams", callix: true, chatgpt: false, fireflies: false, gong: false, hyros: false, chorus: false, arcads: false },
+    { feature: "Aligns Sales & Marketing", callix: true, chatgpt: false, fireflies: false, gong: false, hyros: false, chorus: false, arcads: false },
+    { feature: "Built for High-Ticket GTM", callix: true, chatgpt: false, fireflies: false, gong: true, hyros: false, chorus: false, arcads: false },
   ];
 
   const competitors = ['chatgpt', 'fireflies', 'gong', 'hyros', 'chorus', 'arcads'] as const;
+
+  const competitorLogos: Record<string, string> = {
+    chatgpt: '/logos/chatgpt.png',
+    fireflies: '/logos/fireflies.png',
+    gong: '/logos/gong.png',
+    hyros: '/logos/hyros.png',
+    arcads: '/logos/arcads.png',
+    chorus: '/logos/chorus.png'
+  };
+
   const competitorNames: Record<string, string> = {
     chatgpt: 'ChatGPT',
     fireflies: 'Fireflies',
     gong: 'Gong',
     hyros: 'Hyros',
-    chorus: 'Chorus',
+    chorus: 'ZoomInfo',
     arcads: 'Arcads'
   };
 
@@ -41,11 +49,44 @@ const IntelligentTools: React.FC = () => {
         <table className="w-full text-left min-w-[1000px]">
           <thead>
             <tr className="bg-zinc-900/50">
-              <th className="px-6 py-5 text-[12px] font-bold uppercase tracking-widest text-zinc-400">Feature</th>
-              <th className="px-5 py-5 text-[13px] font-bold uppercase tracking-widest text-white text-center bg-brand-blue/50 border-x-2 border-t-2 border-white shadow-[inset_0_0_15px_rgba(255,255,255,0.1),0_0_10px_rgba(255,255,255,0.3)]">Callix</th>
+              <th className="px-6 py-2 text-[12px] font-bold uppercase tracking-widest text-zinc-400">Feature</th>
+              <th className="px-5 py-2 text-center bg-brand-blue/50 border-x-2 border-t-2 border-white shadow-[inset_0_0_15px_rgba(255,255,255,0.1),0_0_10px_rgba(255,255,255,0.3)]">
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <div className="flex items-center justify-center h-20 w-full">
+                    <img
+                      src="/logos/callix.png"
+                      alt="Callix"
+                      className="max-h-16 max-w-[140px] object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]"
+                    />
+                  </div>
+                  <span className="text-[13px] font-bold uppercase tracking-widest text-white">
+                    Callix
+                  </span>
+                </div>
+              </th>
               {competitors.map(comp => (
-                <th key={comp} className="px-5 py-5 text-[12px] font-bold uppercase tracking-widest text-zinc-400 text-center">
-                  {competitorNames[comp]}
+                <th key={comp} className="px-5 py-2 text-center align-middle">
+                  <div className="flex flex-col items-center justify-center gap-1">
+                    <div className="flex items-center justify-center h-20 w-full">
+                      {competitorLogos[comp] ? (
+                        <img
+                          src={competitorLogos[comp]}
+                          alt={comp}
+                          className={`object-contain opacity-60 hover:opacity-100 transition-opacity ${comp === 'hyros'
+                            ? 'max-h-16 max-w-[140px]'
+                            : 'max-h-10 max-w-[110px]'
+                            }`}
+                        />
+                      ) : (
+                        <span className="text-[12px] font-bold uppercase tracking-widest text-zinc-400 text-center">
+                          {competitorNames[comp]}
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-[11px] font-medium uppercase tracking-widest text-zinc-500">
+                      {competitorNames[comp]}
+                    </span>
+                  </div>
                 </th>
               ))}
             </tr>

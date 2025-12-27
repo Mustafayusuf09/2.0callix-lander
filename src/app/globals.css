@@ -104,19 +104,23 @@
 
 @layer utilities {
   @keyframes marquee {
-    0% {
+    from {
       transform: translateX(0);
     }
 
-    100% {
-      transform: translateX(-50%);
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
     }
   }
 
   .animate-marquee {
     display: flex;
     width: max-content;
-    animation: marquee 40s linear infinite;
+    animation: marquee var(--duration) linear infinite;
+  }
+
+  .max-w-container {
+    max-width: 1280px;
   }
 
   .no-scrollbar::-webkit-scrollbar {

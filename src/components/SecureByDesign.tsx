@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     AudioWaveform,
@@ -9,6 +9,7 @@ import {
     Gauge,
     ScanSearch,
     Waypoints,
+    Zap,
     Mic,
     Target,
     Workflow,
@@ -33,9 +34,691 @@ import {
     FileText,
     MessageSquare,
     PieChart,
-    Lightbulb
+    Lightbulb,
+    Facebook,
+    Linkedin,
+    Globe,
+    Image,
+    MonitorPlay,
+    Check,
+    Loader2,
+    MousePointer2,
+    Twitter
 } from 'lucide-react';
 import { ShimmerButton } from './ShimmerButton';
+
+// --- SUB-COMPONENTS FOR VISUALS ---
+
+const ConversationVisual: React.FC = () => {
+    const [step, setStep] = useState(0); // 0: Call, 1: Transition/Analysis
+
+    useEffect(() => {
+        // Variable duration loop
+        let timer: NodeJS.Timeout;
+        if (step === 0) {
+            // Active call state - shorter duration
+            timer = setTimeout(() => setStep(1), 4000);
+        } else {
+            // Analysis state - longer duration for reading
+            timer = setTimeout(() => setStep(0), 10000);
+        }
+        return () => clearTimeout(timer);
+    }, [step]);
+
+    return (
+        <div className="w-full h-full p-4 sm:p-8 flex flex-col justify-center relative">
+            {/* Background glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/20 blur-[80px] rounded-full pointer-events-none" />
+
+            <div className="relative w-full max-w-[400px] mx-auto aspect-video sm:aspect-[4/3]">
+                <AnimatePresence mode="wait">
+                    {step === 0 ? (
+                        <motion.div
+                            key="call"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
+                            transition={{ duration: 0.5 }}
+                            className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+                        >
+                            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 p-[2px] mb-4">
+                                <div className="w-full h-full rounded-full bg-zinc-950 overflow-hidden relative">
+                                    <div className="w-full h-full bg-[url('/emma.jpg')] bg-cover bg-center" />
+                                </div>
+                            </div>
+                            <h3 className="text-white text-xl font-medium mb-1.5">Sarah Miller</h3>
+                            <div className="text-zinc-500 text-sm mb-8 font-mono">04:12 • Connected</div>
+
+                            <div className="flex gap-1 items-end h-12">
+                                {[...Array(12)].map((_, i) => (
+                                    <motion.div
+                                        key={i}
+                                        className="w-1.5 bg-indigo-500 rounded-full"
+                                        animate={{ height: [12, 32, 12] }}
+                                        transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.1 }}
+                                    />
+                                ))}
+                            </div>
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="analysis"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
+                            className="absolute inset-2 sm:inset-4 bg-[#0C0C0E]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+                        >
+                            {/* Header */}
+                            <div className="px-4 py-3 border-b border-white/5 flex items-center justify-between bg-white/[0.02] shrink-0">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-8 h-8 rounded-full bg-indigo-500/20 p-[1px] ring-1 ring-indigo-500/30 overflow-hidden">
+                                        <img src="/emma.jpg" alt="Sarah Miller" className="w-full h-full object-cover rounded-full" />
+                                    </div>
+                                    <div>
+                                        <div className="text-zinc-100 text-sm font-medium leading-none mb-1">Sarah Miller</div>
+                                        <div className="flex items-center gap-1.5">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                            <span className="text-[10px] text-zinc-400 font-mono uppercase tracking-wider">Analysis Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Content - 3 Stacked Cards */}
+                            <div className="p-2 flex flex-col gap-2 h-full overflow-hidden min-h-0">
+                                {/* Summary Block */}
+                                <div className="flex-1 min-h-0 bg-white/[0.02] border border-white/5 rounded-xl p-3 flex flex-col justify-center">
+                                    <div className="flex items-center gap-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-1">
+                                        <Sparkles size={10} className="text-zinc-400" />
+                                        <span>Call Summary</span>
+                                    </div>
+                                    <div className="text-[11px] text-zinc-300 leading-snug line-clamp-2">
+                                        Budget allocation confirmed for Q3 rollout. Stakeholders aligned on timeline.
+                                    </div>
+                                </div>
+
+                                {/* Buyer Intent */}
+                                <div className="flex-1 min-h-0 bg-emerald-500/5 border border-emerald-500/10 rounded-xl p-3 relative flex flex-col justify-center group overflow-hidden">
+                                    <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    <div className="flex items-center justify-between relative z-10 mb-1">
+                                        <div className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">Buyer Intent</div>
+                                        <TrendingUp size={14} className="text-emerald-400 opacity-80" />
+                                    </div>
+                                    <div className="text-lg font-medium text-emerald-400 relative z-10">96%</div>
+                                </div>
+
+                                {/* Objection */}
+                                <div className="flex-1 min-h-0 bg-red-500/5 border border-red-500/10 rounded-xl p-3 relative flex flex-col justify-center group overflow-hidden">
+                                    <div className="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    <div className="flex items-center justify-between relative z-10 mb-1">
+                                        <div className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">Major Objection</div>
+                                        <Shield size={14} className="text-red-400 opacity-80" />
+                                    </div>
+                                    <div className="text-sm font-medium text-red-400 relative z-10">Competitor Lock-in</div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        </div>
+    );
+};
+
+const AdCreativeVisual: React.FC = () => {
+    const [step, setStep] = useState(0); // 0: Platform, 1: Type, 2: Format, 3: Generating, 4: Result
+    const [showHighlight, setShowHighlight] = useState(false);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setStep((prev) => (prev + 1) % 5);
+        }, 3000); // 3s per step
+        return () => clearInterval(timer);
+    }, []);
+
+    // Sync highlight with cursor click
+    useEffect(() => {
+        setShowHighlight(false);
+        const timer = setTimeout(() => {
+            setShowHighlight(true);
+        }, 900); // Highlight after cursor "clicks" (approx 0.4 * 2s animation)
+        return () => clearTimeout(timer);
+    }, [step]);
+
+    // Custom Icon Components for Brands
+    const MetaIcon = ({ className, size }: { className?: string, size?: number }) => (
+        <img
+            src="/logos/meta.png"
+            alt="Meta"
+            style={{ width: size || 24, height: size || 24 }}
+            className={`object-contain ${className}`}
+        />
+    );
+
+    const GoogleAdsIcon = ({ className, size }: { className?: string, size?: number }) => (
+        <img
+            src="/logos/google_ads.png"
+            alt="Google Ads"
+            style={{ width: size || 24, height: size || 24 }}
+            className={`object-contain ${className}`}
+        />
+    );
+
+    const XIcon = ({ className, size }: { className?: string, size?: number }) => (
+        <svg viewBox="0 0 24 24" fill="currentColor" width={size || 24} height={size || 24} className={className}>
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+    );
+
+    const LadyIcon = ({ className, size }: { className?: string, size?: number }) => (
+        <img
+            src="/emma.jpg"
+            alt="Lady"
+            style={{ width: size || 24, height: size || 24 }}
+            className={`object-cover rounded-full ${className}`}
+        />
+    );
+
+    const steps = [
+        { label: "Platform", items: [{ icon: MetaIcon, label: "Meta", active: true }, { icon: GoogleAdsIcon, label: "Google Ads" }, { icon: XIcon, label: "X Ads" }] },
+        { label: "Choose Avatar", items: [{ icon: Users, label: "Founder Avatar" }, { icon: LadyIcon, label: "Sales Rep Avatar", active: true }, { icon: Users, label: "Marketing Director Avatar" }] },
+        { label: "Format", items: [{ icon: MonitorPlay, label: "Video", active: true }, { icon: Image, label: "Static" }] },
+        { label: "Generating", items: [] },
+        { label: "Complete", items: [] }
+    ];
+
+    return (
+        <div className="w-full h-full p-4 sm:p-8 flex flex-col justify-center relative">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-orange-500/10 blur-[80px] rounded-full pointer-events-none" />
+
+            <div className="relative w-full max-w-[500px] mx-auto aspect-video sm:aspect-[16/10] flex flex-col">
+                {/* Progress Bar */}
+                <div className="flex gap-2 mb-8">
+                    {[0, 1, 2, 3, 4].map(i => (
+                        <div key={i} className={`h-1 flex-1 rounded-full transition-all duration-500 ${i <= step ? "bg-gradient-to-r from-orange-500 to-purple-600" : "bg-zinc-800"}`} />
+                    ))}
+                </div>
+
+                <div className="flex-1 flex flex-col justify-center items-center text-center">
+                    <AnimatePresence mode="wait">
+                        {step < 3 ? (
+                            <motion.div
+                                key={`step-${step}`}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.3 }}
+                                className="w-full"
+                            >
+                                <h4 className="text-zinc-500 text-sm uppercase tracking-widest font-medium mb-8">{steps[step].label}</h4>
+                                <div className="flex justify-center gap-6">
+                                    {steps[step].items.map((item, idx) => {
+                                        const isActive = item.active && showHighlight;
+                                        return (
+                                            <div
+                                                key={idx}
+                                                className={`relative flex flex-col items-center gap-5 p-8 rounded-2xl border transition-all duration-500 min-w-[140px] ${isActive
+                                                    ? "bg-gradient-to-br from-orange-500/10 to-purple-600/10 border-orange-500/50 text-white shadow-[0_0_30px_-5px_rgba(249,115,22,0.3)] scale-110 z-10"
+                                                    : "bg-white/5 border-white/5 text-zinc-600 grayscale opacity-40 scale-95"}`}
+                                            >
+                                                <item.icon size={32} className={isActive ? "text-orange-400" : ""} />
+                                                <span className="text-sm font-medium tracking-wide">{item.label}</span>
+
+                                                {/* Cursor Animation - Rendered based on static 'active' to show the action */}
+                                                {item.active && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, x: 40, y: 40 }}
+                                                        animate={{
+                                                            opacity: [0, 1, 1, 0],
+                                                            x: [40, 0, 0, 0],
+                                                            y: [40, 0, 0, 0],
+                                                            scale: [1, 1, 0.8, 1]
+                                                        }}
+                                                        transition={{
+                                                            duration: 2,
+                                                            times: [0, 0.3, 0.4, 1],
+                                                            ease: "easeInOut"
+                                                        }}
+                                                        className="absolute -bottom-6 -right-6 z-50 pointer-events-none drop-shadow-xl"
+                                                    >
+                                                        <MousePointer2 size={32} className="fill-white text-black" />
+                                                    </motion.div>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </motion.div>
+                        ) : step === 3 ? (
+                            <motion.div
+                                key="generating"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.3 }}
+                                className="flex flex-col items-center justify-center gap-6"
+                            >
+                                <div className="relative">
+                                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-purple-600 blur-2xl rounded-full opacity-50 animate-pulse" />
+                                    <Loader2 size={56} className="text-white animate-spin relative z-10" />
+                                </div>
+                                <p className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-purple-400 text-sm font-medium animate-pulse tracking-wide">
+                                    Generating your asset...
+                                </p>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="result"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ type: "spring", bounce: 0.5 }}
+                                className="w-full relative px-2"
+                            >
+                                <div className="absolute inset-x-2 inset-y-0 bg-gradient-to-t from-black/90 to-transparent z-10 rounded-xl pointer-events-none" />
+                                <div className="aspect-video bg-zinc-900 rounded-xl overflow-hidden relative border border-white/10 group shadow-2xl">
+                                    {/* Mock Video UI */}
+                                    <div className="w-full h-full bg-zinc-900 flex items-center justify-center relative">
+                                        {/* Abstract content preview */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-black opacity-50" />
+                                        <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md border border-white/20 shadow-xl group-hover:scale-110 transition-transform cursor-pointer">
+                                            <MonitorPlay size={28} className="text-white ml-1" />
+                                        </div>
+                                    </div>
+                                    <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
+                                        <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                                            <motion.div
+                                                className="h-full bg-gradient-to-r from-orange-500 to-purple-600"
+                                                initial={{ width: "0%" }}
+                                                animate={{ width: "100%" }}
+                                                transition={{ duration: 2, ease: "linear" }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="absolute -top-4 -right-2 z-30">
+                                    <motion.div
+                                        initial={{ scale: 0 }}
+                                        animate={{ scale: 1 }}
+                                        className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 border border-white/20"
+                                    >
+                                        <Check size={12} strokeWidth={3} /> READY
+                                    </motion.div>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
+// --- MAIN COMPONENT ---
+
+
+const SalesPerformanceVisual: React.FC = () => {
+    return (
+        <div className="w-full h-full relative overflow-hidden group flex items-center bg-transparent">
+            {/* Dashboard Mockup Container - Positioned to the right of the popup */}
+            <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="absolute top-12 bottom-6 right-6 left-[280px] sm:left-[340px] bg-[#0C0C0E]/80 border-t border-l border-white/10 rounded-2xl overflow-hidden z-0"
+            >
+                {/* The Mockup Image */}
+                <div className="relative w-full h-full">
+                    <img
+                        src="/dashboard-mockup.png"
+                        alt="Dashboard"
+                        className="w-full h-full object-cover object-left-top select-none grayscale-[0.2]"
+                    />
+
+                    {/* Fade Out Edges */}
+                    <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0A0A0B] to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0A0A0B] to-transparent" />
+                </div>
+            </motion.div>
+
+            {/* Popup Card - Pushed to Left & Overlapping */}
+            <motion.div
+                initial={{ opacity: 0, x: -20, scale: 0.95 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2, type: "spring", bounce: 0.3 }}
+                className="relative z-20 w-fit max-w-[320px] ml-4 sm:ml-10"
+            >
+                <div className="relative">
+                    {/* Card Glow */}
+                    <div className="absolute -top-20 -right-20 w-40 h-40 bg-orange-500/10 blur-[60px] rounded-full pointer-events-none" />
+                    <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-purple-500/10 blur-[60px] rounded-full pointer-events-none" />
+
+                    <div className="p-6 flex flex-col items-center text-center relative z-10">
+
+
+                        <div className="w-24 h-24 flex items-center justify-center relative mb-4">
+                            <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 96 96">
+                                <circle cx="48" cy="48" r="42" stroke="currentColor" strokeWidth="6" fill="transparent" className="text-white/5" />
+                                <motion.circle
+                                    cx="48" cy="48" r="42"
+                                    stroke="url(#deal-probability-gradient)"
+                                    strokeWidth="6"
+                                    fill="transparent"
+                                    strokeDasharray={263.89}
+                                    strokeDashoffset={263.89}
+                                    animate={{ strokeDashoffset: 47.5 }} // ~82% of 263.89 (approx 216.39 visible) -> offset ~47.5
+                                    transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+                                    strokeLinecap="round"
+                                />
+                                <defs>
+                                    <linearGradient id="deal-probability-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stopColor="#f97316" />
+                                        <stop offset="100%" stopColor="#a855f7" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div className="flex flex-col items-center z-10">
+                                <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-zinc-400">82%</span>
+                            </div>
+                        </div>
+
+                        <h3 className="text-zinc-100 font-medium text-lg mb-1">Nexus Enterprise</h3>
+                        <p className="text-xs text-zinc-400 mb-6">Probability to Close</p>
+
+                        <div className="w-full space-y-2">
+                            <div className="flex items-center gap-2 text-xs text-zinc-300 bg-white/5 p-2 rounded-lg border border-white/5">
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                Budget Approved
+                            </div>
+                            <div className="flex items-center gap-2 text-xs text-zinc-300 bg-white/5 p-2 rounded-lg border border-white/5">
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                Decision Maker Involved
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
+    );
+};
+
+
+const AiSearchVisual: React.FC = () => {
+    const [displayText, setDisplayText] = useState("");
+    const [showResults, setShowResults] = useState(false);
+    const fullText = '"Show me calls where prospects mentioned competitors"';
+
+    useEffect(() => {
+        let isMounted = true;
+        const runSequence = async () => {
+            while (isMounted) {
+                setDisplayText("");
+                setShowResults(false);
+                await new Promise(r => setTimeout(r, 1000));
+                if (!isMounted) break;
+
+                for (let i = 1; i <= fullText.length; i++) {
+                    if (!isMounted) break;
+                    setDisplayText(fullText.slice(0, i));
+                    await new Promise(r => setTimeout(r, 30));
+                }
+
+                if (!isMounted) break;
+                await new Promise(r => setTimeout(r, 400));
+                if (!isMounted) break;
+                setShowResults(true);
+                await new Promise(r => setTimeout(r, 5000));
+            }
+        };
+        runSequence();
+        return () => { isMounted = false; };
+    }, []);
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2
+            }
+        },
+        exit: { opacity: 0 }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 10 },
+        visible: { opacity: 1, y: 0 }
+    };
+
+    return (
+        <div className="w-full h-full p-8 flex flex-col justify-center relative">
+            <div className="absolute top-[20%] left-[30%] w-48 h-48 bg-pink-500/20 blur-[80px] rounded-full pointer-events-none" />
+            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-[24px] p-8 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col w-full">
+                <div className="mb-6 shrink-0 relative">
+                    <div className="absolute left-3 top-1/2 -translate-y-1/2">
+                        <Search size={14} className="text-pink-400" />
+                    </div>
+                    <div className="w-full bg-zinc-900/80 border border-white/10 rounded-xl py-3 pl-9 pr-4 text-xs text-zinc-300 h-10 flex items-center shadow-inner">
+                        {displayText}<span className="animate-pulse ml-0.5 text-pink-400">|</span>
+                    </div>
+                </div>
+
+                <div className="min-h-[160px]">
+                    <AnimatePresence mode="wait">
+                        {showResults && (
+                            <motion.div
+                                variants={containerVariants}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                className="space-y-2"
+                            >
+                                <motion.div variants={itemVariants} className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider pl-1 mb-2">
+                                    Results Found (12)
+                                </motion.div>
+                                <motion.div variants={itemVariants} className="bg-white/5 p-3 rounded-xl border border-white/5 hover:border-pink-500/30 transition-colors cursor-pointer group">
+                                    <div className="flex justify-between items-start mb-1">
+                                        <span className="text-white text-sm font-medium">Demo call w/ Tech Corp</span>
+                                        <span className="text-[10px] text-zinc-500">2h ago</span>
+                                    </div>
+                                    <p className="text-xs text-zinc-400 group-hover:text-zinc-300 transition-colors">"...we're mostly looking at <span className="text-pink-400 bg-pink-500/10 px-1 rounded">Salesforce</span> right now..."</p>
+                                </motion.div>
+                                <motion.div variants={itemVariants} className="bg-white/5 p-3 rounded-xl border border-white/5 hover:border-pink-500/30 transition-colors cursor-pointer group">
+                                    <div className="flex justify-between items-start mb-1">
+                                        <span className="text-white text-sm font-medium">Sales Call w/ Acme Inc</span>
+                                        <span className="text-[10px] text-zinc-500">Yesterday</span>
+                                    </div>
+                                    <p className="text-xs text-zinc-400 group-hover:text-zinc-300 transition-colors">"...how do you compare to <span className="text-pink-400 bg-pink-500/10 px-1 rounded">HubSpot</span> feature-wise..."</p>
+                                </motion.div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
+const AttributionAnalyticsVisual: React.FC = () => {
+    const [value, setValue] = useState(0);
+
+    useEffect(() => {
+        const duration = 2500;
+        const start = 0;
+        const end = 128.5;
+        const startTime = performance.now();
+        let animationFrameId: number;
+
+        const animate = (currentTime: number) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out expo
+            const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+
+            setValue(start + (end - start) * ease);
+
+            if (progress < 1) {
+                animationFrameId = requestAnimationFrame(animate);
+            }
+        };
+
+        animationFrameId = requestAnimationFrame(animate);
+
+        return () => cancelAnimationFrame(animationFrameId);
+    }, []);
+
+    return (
+        <div className="w-full h-full relative overflow-hidden group flex items-center justify-end bg-transparent">
+            {/* Dashboard Mockup - Positioned Left */}
+            <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="absolute top-12 bottom-6 left-6 right-[280px] sm:right-[340px] bg-[#0C0C0E]/80 border-t border-r border-white/10 rounded-tr-2xl overflow-hidden z-0"
+            >
+                <div className="relative w-full h-full">
+                    <img
+                        src="/dashboard-mockup.png"
+                        alt="Dashboard"
+                        className="w-full h-full object-cover object-top select-none grayscale-[0.2]"
+                    />
+                    {/* Fade Out Edges - Left & Bottom */}
+                    <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0A0A0B] to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0A0A0B] to-transparent" />
+                </div>
+            </motion.div>
+
+            {/* Revenue Card - Positioned Right */}
+            <motion.div
+                initial={{ opacity: 0, x: 20, scale: 0.95 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2, type: "spring", bounce: 0.3 }}
+                className="relative z-20 w-fit max-w-[320px] mr-4 sm:mr-10"
+            >
+                <div className="relative">
+                    {/* Glows */}
+                    <div className="absolute -top-20 -left-20 w-40 h-40 bg-cyan-500/10 blur-[60px] rounded-full pointer-events-none" />
+                    <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-blue-500/10 blur-[60px] rounded-full pointer-events-none" />
+
+                    <div className="p-6 flex flex-col relative z-10 w-[240px]">
+                        <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-zinc-500 font-semibold mb-6">
+                            <Waypoints size={12} className="text-cyan-400" />
+                            Revenue Impact
+                        </div>
+
+                        <div className="mb-6">
+                            <div className="text-zinc-400 text-xs mb-1">Total Attributed</div>
+                            <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-zinc-400">
+                                ${value.toFixed(1)}k
+                            </div>
+                        </div>
+
+                        <div className="space-y-4 w-full">
+                            <div>
+                                <div className="flex justify-between text-[11px] mb-1">
+                                    <span className="text-zinc-300">Paid Social</span>
+                                    <span className="text-zinc-500">$84k</span>
+                                </div>
+                                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        animate={{ width: "65%" }}
+                                        transition={{ duration: 1, delay: 0.5 }}
+                                        className="h-full bg-cyan-500 rounded-full"
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <div className="flex justify-between text-[11px] mb-1">
+                                    <span className="text-zinc-300">Search</span>
+                                    <span className="text-zinc-500">$32k</span>
+                                </div>
+                                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        animate={{ width: "25%" }}
+                                        transition={{ duration: 1, delay: 0.7 }}
+                                        className="h-full bg-blue-500 rounded-full"
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <div className="flex justify-between text-[11px] mb-1">
+                                    <span className="text-zinc-300">Organic</span>
+                                    <span className="text-zinc-500">$12k</span>
+                                </div>
+                                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        animate={{ width: "10%" }}
+                                        transition={{ duration: 1, delay: 0.9 }}
+                                        className="h-full bg-indigo-500 rounded-full"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
+    );
+};
+
+
+const PixelOptimizationVisual: React.FC = () => {
+    return (
+        <div className="w-full h-full relative overflow-hidden flex items-center justify-center p-8">
+            {/* Ambient Glow */}
+            <div className="absolute w-full max-w-[400px] h-[100px] bg-emerald-500/10 blur-[60px] rounded-full pointer-events-none" />
+
+            <div className="flex items-center gap-8 relative z-10 w-full max-w-md justify-between">
+                {/* Left: Source */}
+                <div className="flex flex-col items-center gap-3">
+                    <div className="w-16 h-16 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] relative group ring-1 ring-white/5">
+                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent rounded-2xl opacity-50" />
+                        <div className="absolute inset-0 bg-emerald-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <Check size={24} className="text-emerald-400 relative z-10 drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]" strokeWidth={3} />
+                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[#18181b] shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                    </div>
+                    <div className="text-xs text-zinc-300 font-medium tracking-wide">Conversion</div>
+                </div>
+
+                {/* Center: Transfer Animation */}
+                <div className="flex-1 h-12 flex items-center justify-center relative">
+                    <div className="absolute inset-0 bg-white/5 backdrop-blur-sm rounded-full border border-white/5 shadow-inner" />
+                    <div className="w-full h-[1px] bg-white/10 relative overflow-hidden mx-4">
+                        {/* Moving Beam */}
+                        <motion.div
+                            className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-80 blur-[1px]"
+                            animate={{ x: ["-100%", "300%"] }}
+                            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                        />
+                        {/* Particle */}
+                        <motion.div
+                            className="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,1)]"
+                            animate={{ left: ["0%", "100%"], opacity: [0, 1, 1, 0], scale: [0.5, 1, 1, 0.5] }}
+                            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                        />
+                    </div>
+                </div>
+
+                {/* Right: Destination */}
+                <div className="flex flex-col items-center gap-3">
+                    <div className="w-16 h-16 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] relative overflow-hidden ring-1 ring-white/5">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-orange-500/10 opacity-50" />
+                        <div className="grid grid-cols-2 gap-2 relative z-10">
+                            <Facebook size={18} className="text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.5)]" />
+                            <img src="/logos/google_ads.png" className="w-4 h-4 object-contain opacity-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]" />
+                        </div>
+                    </div>
+                    <div className="text-xs text-zinc-300 font-medium tracking-wide">Ad Platforms</div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const SecureByDesign: React.FC = () => {
     const [activeTab, setActiveTab] = useState(0);
@@ -45,49 +728,9 @@ const SecureByDesign: React.FC = () => {
             title: "Conversation Intelligence",
             icon: <AudioWaveform size={20} />,
             color: "from-purple-500 to-indigo-500",
-            visual: (
-                <div className="w-full h-full p-8 flex flex-col justify-center relative animate-in zoom-in-95 duration-500">
-                    <div className="absolute top-[20%] left-[20%] w-48 h-48 bg-purple-500/20 blur-[80px] rounded-full" />
-                    <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-[24px] p-8 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] relative overflow-hidden">
-                        <div className="flex gap-4 items-start mb-6">
-                            <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30">
-                                <Users size={18} className="text-indigo-400" />
-                            </div>
-                            <div className="flex-1 space-y-2">
-                                <div className="h-2 w-24 bg-zinc-800 rounded-full" />
-                                <div className="h-2 w-full bg-zinc-800/50 rounded-full" />
-                                <div className="h-2 w-2/3 bg-zinc-800/50 rounded-full" />
-                            </div>
-                        </div>
-                        <div className="flex gap-4 items-start justify-end">
-                            <div className="flex-1 space-y-2 text-right">
-                                <div className="h-2 w-24 bg-zinc-800 rounded-full ml-auto" />
-                                <div className="h-16 w-full bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-2xl rounded-tr-none border border-indigo-500/20 p-3 flex items-center justify-center relative group">
-                                    <p className="text-sm text-indigo-200 font-medium">"I really love how the analytics scale with us..."</p>
-                                    <div className="absolute -top-3 -right-3 bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-[10px] px-2 py-0.5 rounded-full backdrop-blur-sm">
-                                        SENTIMENT: POSITIVE
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/30">
-                                <span className="text-xs text-purple-400 font-bold">JD</span>
-                            </div>
-                        </div>
-                        <div className="mt-6 flex gap-2">
-                            <div className="bg-zinc-900/50 border border-white/5 px-3 py-1.5 rounded-lg flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                                <span className="text-[10px] text-zinc-400 font-mono uppercase tracking-wider">99.2% Accuracy</span>
-                            </div>
-                            <div className="bg-zinc-900/50 border border-white/5 px-3 py-1.5 rounded-lg flex items-center gap-2">
-                                <Brain size={10} className="text-pink-400" />
-                                <span className="text-[10px] text-zinc-400 font-mono uppercase tracking-wider">Emotion Detected</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ),
-            headline: "Understand every sales interaction",
-            description: "Automatic transcription with 99.2% accuracy, speaker identification, and deep conversation flow mapping to capture every nuance.",
+            visual: <ConversationVisual />,
+            headline: "Conversation Intelligence",
+            description: "Extract buyer signals, objections, and intent from every call.",
             subFeatures: [
                 { icon: <Mic size={18} className="text-brand-blue" />, title: "99.2% Accuracy", text: "Precision transcription." },
                 { icon: <Target size={18} className="text-brand-blue" />, title: "Topic Maps", text: "Track key topics & patterns." },
@@ -95,90 +738,12 @@ const SecureByDesign: React.FC = () => {
             ]
         },
         {
-            title: "Customer Profile Intelligence",
-            icon: <ScanFace size={20} />,
-            color: "from-emerald-500 to-green-500",
-            visual: (
-                <div className="w-full h-full p-8 flex flex-col justify-center relative animate-in zoom-in-95 duration-500">
-                    <div className="absolute bottom-[20%] right-[20%] w-48 h-48 bg-emerald-500/20 blur-[80px] rounded-full" />
-                    <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-[24px] p-8 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col items-center text-center">
-                        <div className="w-20 h-20 rounded-full p-[2px] bg-gradient-to-br from-emerald-400 to-green-600 mb-4 shadow-xl shadow-emerald-900/20">
-                            <div className="w-full h-full rounded-full bg-zinc-900 overflow-hidden relative">
-                                <div className="w-full h-full bg-[url('https://api.dicebear.com/7.x/avataaars/svg?seed=Jude')] bg-cover" />
-                            </div>
-                        </div>
-                        <h4 className="text-xl text-white font-display">Tech Growth Director</h4>
-                        <div className="flex gap-2 justify-center mt-2 mb-4">
-                            <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full">High Value</span>
-                            <span className="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full">Short Sales Cycle</span>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-3 w-full">
-                            <div className="bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-xl">
-                                <div className="text-[10px] text-emerald-400 uppercase tracking-wider font-semibold mb-1">Lifetime Value</div>
-                                <div className="text-lg text-white font-bold">$42,500</div>
-                            </div>
-                            <div className="bg-white/5 border border-white/10 p-3 rounded-xl">
-                                <div className="text-[10px] text-zinc-400 uppercase tracking-wider font-semibold mb-1">Conv. Rate</div>
-                                <div className="text-lg text-white font-bold">18.4%</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ),
-            headline: "Know exactly who your best customers are",
-            description: "Automatically categorize prospect types and reveal conversion rates, AOV, and LTV by customer profile.",
-            subFeatures: [
-                { icon: <Users size={18} className="text-brand-blue" />, title: "Auto-Categorization", text: "Segment by behavior." },
-                { icon: <TrendingUp size={18} className="text-brand-blue" />, title: "LTV & AOV", text: "Revenue metrics by profile." },
-                { icon: <Brain size={18} className="text-brand-blue" />, title: "Psychographics", text: "Behavioral insights." }
-            ]
-        },
-        {
             title: "Ad Creative Generation",
             icon: <Wand2 size={20} />,
             color: "from-blue-500 to-cyan-500",
-            visual: (
-                <div className="w-full h-full p-8 flex flex-col justify-center relative animate-in zoom-in-95 duration-500">
-                    <div className="absolute top-[30%] left-[30%] w-56 h-56 bg-blue-500/20 blur-[90px] rounded-full" />
-                    <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-[24px] p-6 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] relative overflow-hidden">
-                        <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-3">
-                            <div className="flex items-center gap-2">
-                                <div className="w-6 h-6 rounded bg-blue-500/20 flex items-center justify-center text-blue-400">
-                                    <Wand2 size={12} />
-                                </div>
-                                <span className="text-xs font-medium text-blue-200">Creative Generator</span>
-                            </div>
-                            <div className="flex gap-1">
-                                <div className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-                                <div className="h-1.5 w-1.5 rounded-full bg-blue-500/30" />
-                            </div>
-                        </div>
-                        <div className="space-y-3">
-                            {/* Ad Copy Card */}
-                            <div className="p-3 bg-zinc-900/50 rounded-xl border border-white/5 group hover:border-blue-500/30 transition-colors">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <FileText size={10} className="text-blue-400" />
-                                    <span className="text-[10px] text-zinc-500 font-mono uppercase">Generated Ad Copy</span>
-                                </div>
-                                <div className="text-sm text-zinc-200 leading-snug">"Stop losing deals to <span className="text-blue-400 bg-blue-500/10 px-1 rounded">bad attribution</span>. See exactly what converts."</div>
-                            </div>
-                            {/* Video Script Card */}
-                            <div className="p-3 bg-zinc-900/50 rounded-xl border border-white/5 group hover:border-pink-500/30 transition-colors">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <Video size={10} className="text-pink-400" />
-                                    <span className="text-[10px] text-zinc-500 font-mono uppercase">Video Script • Hook</span>
-                                </div>
-                                <div className="text-xs text-zinc-400 font-mono p-2 bg-black/40 rounded border border-white/5">
-                                    0:00 [Face Camera] "I tried 5 tools..."
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ),
-            headline: "Turn sales insights into campaigns",
-            description: "Generate ad copy and video scripts using actual buyer language and proven messaging backed by millions in sales data.",
+            visual: <AdCreativeVisual />,
+            headline: "Ad Creative Generation",
+            description: "Turn call insights into ad creatives automatically.",
             subFeatures: [
                 { icon: <FileText size={18} className="text-brand-blue" />, title: "Buyer Language", text: "Prompts from real calls." },
                 { icon: <Video size={18} className="text-brand-blue" />, title: "Video Scripts", text: "Tailored to profiles." },
@@ -189,55 +754,9 @@ const SecureByDesign: React.FC = () => {
             title: "Sales Performance Tools",
             icon: <Gauge size={20} />,
             color: "from-orange-500 to-red-500",
-            visual: (
-                <div className="w-full h-full p-8 flex flex-col justify-center relative animate-in zoom-in-95 duration-500">
-                    <div className="absolute top-[20%] right-[20%] w-48 h-48 bg-orange-500/20 blur-[80px] rounded-full" />
-                    <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-[24px] p-8 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] relative overflow-hidden">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
-                                <Gauge size={18} className="text-orange-400" />
-                            </div>
-                            <div>
-                                <div className="text-white font-semibold text-sm">Team Velocity</div>
-                                <div className="text-xs text-zinc-500">Live Performance</div>
-                            </div>
-                        </div>
-                        {/* Performance Bars */}
-                        <div className="space-y-4">
-                            <div className="group">
-                                <div className="flex justify-between text-xs mb-1">
-                                    <span className="text-zinc-400 group-hover:text-white transition-colors">Win Rate</span>
-                                    <span className="text-orange-400">32%</span>
-                                </div>
-                                <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                                    <div className="w-[32%] h-full bg-gradient-to-r from-orange-500 to-orange-400 rounded-full" />
-                                </div>
-                            </div>
-                            <div className="group">
-                                <div className="flex justify-between text-xs mb-1">
-                                    <span className="text-zinc-400 group-hover:text-white transition-colors">Quota Attainment</span>
-                                    <span className="text-emerald-400">104%</span>
-                                </div>
-                                <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                                    <div className="w-[85%] h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full" />
-                                </div>
-                            </div>
-                            <div className="mt-4 pt-4 border-t border-white/5 flex gap-3">
-                                <div className="flex-1 bg-white/5 p-3 rounded-lg border border-white/5">
-                                    <span className="text-[10px] text-zinc-500 uppercase block mb-1">Objection</span>
-                                    <span className="text-xs text-white">"Pricing" spike in Q3</span>
-                                </div>
-                                <div className="flex-1 bg-white/5 p-3 rounded-lg border border-white/5">
-                                    <span className="text-[10px] text-zinc-500 uppercase block mb-1">Forecast</span>
-                                    <span className="text-xs text-white">On Track (+5%)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ),
-            headline: "Help your team close more deals",
-            description: "Empower reps with performance benchmarking, common objection insights, and win/loss pattern analysis.",
+            visual: <SalesPerformanceVisual />,
+            headline: "Sales Performance Tools",
+            description: "Score reps, coach on patterns, predict close probability.",
             subFeatures: [
                 { icon: <BarChart3 size={18} className="text-brand-blue" />, title: "Benchmarking", text: "Compare rep performance." },
                 { icon: <Target size={18} className="text-brand-blue" />, title: "Objections", text: "Identify common blockers." },
@@ -248,43 +767,9 @@ const SecureByDesign: React.FC = () => {
             title: "Ai Search",
             icon: <ScanSearch size={20} />,
             color: "from-pink-500 to-rose-500",
-            visual: (
-                <div className="w-full h-full p-8 flex flex-col justify-center relative animate-in zoom-in-95 duration-500">
-                    <div className="absolute top-[20%] left-[30%] w-48 h-48 bg-pink-500/20 blur-[80px] rounded-full" />
-                    <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-[24px] p-8 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] relative overflow-hidden">
-                        <div className="space-y-4">
-                            <div className="relative">
-                                <div className="absolute left-3 top-1/2 -translate-y-1/2">
-                                    <Sparkles size={14} className="text-pink-400" />
-                                </div>
-                                <div className="w-full bg-zinc-900/80 border border-white/10 rounded-xl py-3 pl-9 pr-4 text-xs text-zinc-300">
-                                    "Show me calls where prospects mentioned competitors"
-                                </div>
-                            </div>
-
-                            <div className="space-y-2">
-                                <div className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider pl-1">Results Found (12)</div>
-                                <div className="bg-white/5 p-3 rounded-xl border border-white/5 hover:border-pink-500/30 transition-colors cursor-pointer group">
-                                    <div className="flex justify-between items-start mb-1">
-                                        <span className="text-white text-sm font-medium">Demo #402 - Tech Corp</span>
-                                        <span className="text-[10px] text-zinc-500">2h ago</span>
-                                    </div>
-                                    <p className="text-xs text-zinc-400 group-hover:text-zinc-300 transition-colors">"...we're mostly looking at <span className="text-pink-400 bg-pink-500/10 px-1 rounded">Salesforce</span> right now..."</p>
-                                </div>
-                                <div className="bg-white/5 p-3 rounded-xl border border-white/5 hover:border-pink-500/30 transition-colors cursor-pointer group">
-                                    <div className="flex justify-between items-start mb-1">
-                                        <span className="text-white text-sm font-medium">Discovery - Acme Inc</span>
-                                        <span className="text-[10px] text-zinc-500">Yesterday</span>
-                                    </div>
-                                    <p className="text-xs text-zinc-400 group-hover:text-zinc-300 transition-colors">"...how do you compare to <span className="text-pink-400 bg-pink-500/10 px-1 rounded">HubSpot</span> feature-wise..."</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ),
-            headline: "Ask questions, get instant answers",
-            description: "Conversational AI that searches across your entire call library. Find trends, competitors, and objections instantly.",
+            visual: <AiSearchVisual />,
+            headline: "Ai Search",
+            description: "Ask anything about your pipeline — get instant answers.",
             subFeatures: [
                 { icon: <Search size={18} className="text-brand-blue" />, title: "Instant Search", text: "Query your entire library." },
                 { icon: <Sparkles size={18} className="text-brand-blue" />, title: "Trend Spotting", text: "Identify patterns early." },
@@ -295,51 +780,26 @@ const SecureByDesign: React.FC = () => {
             title: "Attribution & Analytics",
             icon: <Waypoints size={20} />,
             color: "from-cyan-500 to-blue-500",
-            visual: (
-                <div className="w-full h-full p-8 flex flex-col justify-center relative animate-in zoom-in-95 duration-500">
-                    <div className="absolute top-[20%] right-[20%] w-48 h-48 bg-cyan-500/20 blur-[80px] rounded-full" />
-                    <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-[24px] p-8 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] relative overflow-hidden">
-                        <div className="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
-                            <div className="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center">
-                                <Waypoints size={18} className="text-cyan-400" />
-                            </div>
-                            <div>
-                                <div className="text-white font-semibold text-sm">Revenue Mapping</div>
-                                <div className="text-xs text-cyan-400">Marketing to Closed-Won</div>
-                            </div>
-                        </div>
-                        {/* Journey Steps */}
-                        <div className="space-y-3">
-                            <div className="flex items-center gap-3 opacity-60">
-                                <div className="w-6 h-6 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-500 text-[10px]">1</div>
-                                <div className="flex-1 bg-black/20 p-2 rounded-lg border border-white/5">
-                                    <span className="text-zinc-500 text-xs">LinkedIn Ad (UTM: campaign_a)</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <div className="w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-[10px]">2</div>
-                                <div className="flex-1 bg-cyan-500/10 p-2 rounded-lg border border-cyan-500/20 shadow-[0_0_15px_-3px_rgba(6,182,212,0.3)] flex justify-between items-center">
-                                    <span className="text-cyan-100 text-xs font-medium">Quality Score: 92</span>
-                                    <span className="text-[10px] text-cyan-400">High Intent</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-3 opacity-80">
-                                <div className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-[10px]">3</div>
-                                <div className="flex-1 bg-black/20 p-2 rounded-lg border border-white/5 flex justify-between items-center">
-                                    <span className="text-zinc-300 text-xs">Closed Won</span>
-                                    <span className="text-emerald-400 text-xs font-bold">$12k ARR</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ),
-            headline: "Connect marketing spend to revenue",
-            description: "Full UTM tracking from ad click to closed deal, showing you CAC by profile, lead quality scores, and true ROI.",
+            visual: <AttributionAnalyticsVisual />,
+            headline: "Attribution & Analytics",
+            description: "Track the full journey from ad click to closed deal.",
             subFeatures: [
                 { icon: <CheckCircle2 size={18} className="text-brand-blue" />, title: "Full UTM Tracking", text: "Click to close visibility." },
                 { icon: <TrendingUp size={18} className="text-brand-blue" />, title: "CAC by Profile", text: "Cost per acquisition details." },
                 { icon: <Sparkles size={18} className="text-brand-blue" />, title: "Lead Scoring", text: "Quality based on source." }
+            ]
+        },
+        {
+            title: "Pixel Optimization",
+            icon: <ScanFace size={20} />, // Re-using ScanFace as a placeholder for pixel/targeting
+            color: "from-emerald-500 to-green-500",
+            visual: <PixelOptimizationVisual />,
+            headline: "Pixel Optimization",
+            description: "Send call outcomes and lead quality signals back to ad platforms for smarter targeting.",
+            subFeatures: [
+                { icon: <Target size={18} className="text-brand-blue" />, title: "Signal Loops", text: "Feed offline data back." },
+                { icon: <TrendingUp size={18} className="text-brand-blue" />, title: "Better Targeting", text: "Train ads on revenue." },
+                { icon: <CheckCircle2 size={18} className="text-brand-blue" />, title: "Match Rates", text: "High fidelity matching." }
             ]
         }
     ];
@@ -353,15 +813,19 @@ const SecureByDesign: React.FC = () => {
             <div className="max-w-[1280px] mx-auto relative z-10">
                 {/* Section Header */}
                 <div className="text-center mb-10">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-sm">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#FF6B2C] animate-pulse" />
+                        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-400">YOUR AGENTIC CMO</span>
+                    </div>
+
                     <h2 className="text-[48px] lg:text-[72px] font-serif-elegant font-normal tracking-tight leading-[0.95] mb-4 text-white">
                         Everything you need to{' '}
                         <span className="italic bg-gradient-to-r from-brand-blue via-brand-blue-light to-white bg-clip-text text-transparent">
-                            scale
+                            scale.
                         </span>
                     </h2>
                     <p className="text-[18px] text-zinc-400 max-w-[640px] mx-auto leading-relaxed font-light tracking-wide">
-                        Infrastructure that adapts to every stage of your growth.<br className="hidden md:block" />
-                        Built for revenue teams that demand precision.
+                        The only platform that aligns marketing and sales around actual revenue signals.
                     </p>
                 </div>
 

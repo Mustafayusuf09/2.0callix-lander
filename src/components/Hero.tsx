@@ -165,7 +165,13 @@ const Hero: React.FC = () => {
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black via-black/40 to-transparent z-10" />
           <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black via-black/40 to-transparent z-10" />
 
-          <div className="animate-marquee flex items-center gap-24 grayscale w-max">
+          <div
+            className="animate-marquee flex items-center gap-24 grayscale w-max"
+            style={{
+              "--duration": "60s",
+              "--gap": "6rem"
+            } as React.CSSProperties}
+          >
             {/* Repeat multiple times for smooth infinite scroll on wide screens */}
             <div className="flex items-center gap-24">
               <LogoSet />

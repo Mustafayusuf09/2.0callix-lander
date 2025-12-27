@@ -14,12 +14,12 @@ const FinalCTA: React.FC = () => {
 
       <div className="max-w-[1280px] mx-auto text-center relative z-10">
         <h2 className="text-[48px] lg:text-[72px] font-serif-elegant font-normal tracking-tight leading-[1.05] mb-12">
-          Unlock the <span className="italic">Psychology</span> <br />
-          Behind Your Best Buyers
+          Ready to stop paying for <br className="hidden lg:block" />
+          leads that don't close?
         </h2>
 
         <p className="text-[16px] text-zinc-400 max-w-[640px] mx-auto leading-relaxed font-light mb-16">
-          Get a personalized breakdown of your highest-value buyer segments and the motivations that trigger conversion.
+          Book a free demo. We'll show you exactly how Callix works with your funnel.
         </p>
 
 
@@ -31,13 +31,9 @@ const FinalCTA: React.FC = () => {
             shimmerColor="#FFFFFF"
             shimmerSize="0.1em"
           >
-            <span className="relative z-10 text-white">Book Your Demo →</span>
+            <span className="relative z-10 text-white">Book Your Free Demo</span>
           </ShimmerButton>
         </div>
-
-        <p className="mt-12 text-zinc-400 text-[14px] font-light tracking-wide">
-          See hidden creative angles inside your call data today.
-        </p>
       </div>
     </section>
   );
