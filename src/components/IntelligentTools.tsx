@@ -49,7 +49,7 @@ const IntelligentTools: React.FC = () => {
         <table className="w-full text-left min-w-[1000px]">
           <thead>
             <tr className="bg-zinc-900/50">
-              <th className="px-6 py-2 text-[12px] font-bold uppercase tracking-widest text-zinc-400">Feature</th>
+              <th className="px-6 py-2 text-[12px] font-bold uppercase tracking-widest text-zinc-400"></th>
               <th className="px-5 py-2 text-center bg-brand-blue/50 border-x-2 border-t-2 border-white shadow-[inset_0_0_15px_rgba(255,255,255,0.1),0_0_10px_rgba(255,255,255,0.3)]">
                 <div className="flex flex-col items-center justify-center gap-1">
                   <div className="flex items-center justify-center h-20 w-full">

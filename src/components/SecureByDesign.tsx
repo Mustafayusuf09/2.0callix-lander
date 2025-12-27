@@ -130,7 +130,6 @@ const ConversationVisual: React.FC = () => {
                                 {/* Summary Block */}
                                 <div className="flex-1 min-h-0 bg-white/[0.02] border border-white/5 rounded-xl p-3 flex flex-col justify-center">
                                     <div className="flex items-center gap-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-1">
-                                        <Sparkles size={10} className="text-zinc-400" />
                                         <span>Call Summary</span>
                                     </div>
                                     <div className="text-[11px] text-zinc-300 leading-snug line-clamp-2">
@@ -669,51 +668,117 @@ const AttributionAnalyticsVisual: React.FC = () => {
 
 const PixelOptimizationVisual: React.FC = () => {
     return (
-        <div className="w-full h-full relative overflow-hidden flex items-center justify-center p-8">
-            {/* Ambient Glow */}
-            <div className="absolute w-full max-w-[400px] h-[100px] bg-emerald-500/10 blur-[60px] rounded-full pointer-events-none" />
+        <div className="w-full h-full relative overflow-hidden flex items-center justify-center bg-[#050505]">
+            {/* Sophisticated Background Grid */}
+            <div
+                className="absolute inset-0 opacity-20 pointer-events-none"
+                style={{
+                    backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)`,
+                    backgroundSize: '40px 40px',
+                    maskImage: 'radial-gradient(circle at center, black 30%, transparent 80%)'
+                }}
+            />
+            {/* Ambient Nebula Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-indigo-500/5 blur-[100px] rounded-full pointer-events-none" />
 
-            <div className="flex items-center gap-8 relative z-10 w-full max-w-md justify-between">
-                {/* Left: Source */}
-                <div className="flex flex-col items-center gap-3">
-                    <div className="w-16 h-16 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] relative group ring-1 ring-white/5">
-                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent rounded-2xl opacity-50" />
-                        <div className="absolute inset-0 bg-emerald-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <Check size={24} className="text-emerald-400 relative z-10 drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]" strokeWidth={3} />
-                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[#18181b] shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-                    </div>
-                    <div className="text-xs text-zinc-300 font-medium tracking-wide">Conversion</div>
-                </div>
+            <div className="flex items-center gap-6 sm:gap-10 relative z-10 px-4">
 
-                {/* Center: Transfer Animation */}
-                <div className="flex-1 h-12 flex items-center justify-center relative">
-                    <div className="absolute inset-0 bg-white/5 backdrop-blur-sm rounded-full border border-white/5 shadow-inner" />
-                    <div className="w-full h-[1px] bg-white/10 relative overflow-hidden mx-4">
-                        {/* Moving Beam */}
-                        <motion.div
-                            className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-80 blur-[1px]"
-                            animate={{ x: ["-100%", "300%"] }}
-                            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                        />
-                        {/* Particle */}
-                        <motion.div
-                            className="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,1)]"
-                            animate={{ left: ["0%", "100%"], opacity: [0, 1, 1, 0], scale: [0.5, 1, 1, 0.5] }}
-                            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                        />
-                    </div>
-                </div>
+                {/* 1. Signals Source (Left Node) */}
+                <div className="relative group">
+                    {/* Active Halo */}
+                    <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-                {/* Right: Destination */}
-                <div className="flex flex-col items-center gap-3">
-                    <div className="w-16 h-16 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] relative overflow-hidden ring-1 ring-white/5">
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-orange-500/10 opacity-50" />
-                        <div className="grid grid-cols-2 gap-2 relative z-10">
-                            <Facebook size={18} className="text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.5)]" />
-                            <img src="/logos/google_ads.png" className="w-4 h-4 object-contain opacity-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]" />
+                    <div className="w-24 h-24 rounded-full bg-[#0A0A0B] border border-white/10 flex items-center justify-center shadow-2xl relative z-10 overflow-hidden ring-1 ring-white/5 group-hover:ring-white/20 transition-all duration-500">
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50" />
+
+                        {/* Data Visualization Bars */}
+                        <div className="flex items-end justify-center gap-2 h-10">
+                            {[0, 1, 2].map((i) => (
+                                <motion.div
+                                    key={i}
+                                    className="w-3 bg-[#FF6B2C] rounded-[2px] shadow-[0_0_10px_rgba(255,107,44,0.4)]"
+                                    animate={{
+                                        height: i === 1 ? [24, 40, 24] : [16, 32, 16],
+                                        opacity: [0.7, 1, 0.7]
+                                    }}
+                                    transition={{
+                                        duration: 1.5 + i * 0.2,
+                                        repeat: Infinity,
+                                        ease: "easeInOut",
+                                        delay: i * 0.2
+                                    }}
+                                />
+                            ))}
                         </div>
                     </div>
-                    <div className="text-xs text-zinc-300 font-medium tracking-wide">Ad Platforms</div>
+                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-mono uppercase tracking-widest text-zinc-500 font-medium whitespace-nowrap opacity-60">
+                        Live Signals
+                    </div>
+                </div>
+
+                {/* 2. Optimization Flow (Connector) */}
+                <div className="flex items-center gap-0 relative">
+                    {/* Left Line */}
+                    <div className="w-8 sm:w-12 h-[1px] bg-zinc-800 relative overflow-hidden">
+                        <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent w-full opacity-50"
+                            animate={{ x: ['-100%', '100%'] }}
+                            transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+                        />
+                    </div>
+
+                    {/* Central Processing Node */}
+                    <div className="w-10 h-10 rounded-full bg-[#0F0F11] border border-white/10 flex items-center justify-center z-20 shadow-[0_0_20px_-5px_rgba(0,0,0,0.8)] relative">
+                        <div className="absolute inset-0 rounded-full border border-white/5 animate-pulse" />
+                        <img src="/callix-logo.png" alt="Callix AI" className="w-5 h-5 object-contain opacity-90" />
+                    </div>
+
+                    {/* Right Line */}
+                    <div className="w-8 sm:w-12 h-[1px] bg-zinc-800 relative overflow-hidden">
+                        <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent w-full opacity-50"
+                            animate={{ x: ['-100%', '100%'] }}
+                            transition={{ duration: 1.5, repeat: Infinity, ease: 'linear', delay: 0.1 }}
+                        />
+                    </div>
+                </div>
+
+                {/* 3. Ad Platforms (Right Grid) */}
+                <div className="relative">
+                    <div className="grid grid-cols-2 gap-2.5 p-3 rounded-[20px] bg-[#0A0A0B] border border-white/10 shadow-2xl relative z-10 ring-1 ring-white/5">
+                        {/* Google */}
+                        {/* Google */}
+                        <div className="w-10 h-10 rounded-full bg-zinc-900/50 flex items-center justify-center border border-white/5 transition-all">
+                            <img src="/logos/google_ads.png" alt="Google" className="w-4 h-4 object-contain opacity-100 transition-all duration-300" />
+                        </div>
+
+                        {/* TikTok */}
+                        {/* TikTok */}
+                        <div className="w-10 h-10 rounded-full bg-zinc-900/50 flex items-center justify-center border border-white/5 transition-all">
+                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-white transition-colors duration-300">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                            </svg>
+                        </div>
+
+                        {/* Instagram */}
+                        {/* Instagram */}
+                        <div className="w-10 h-10 rounded-full bg-zinc-900/50 flex items-center justify-center border border-white/5 transition-all">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-[#E1306C] transition-colors duration-300">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                            </svg>
+                        </div>
+
+                        {/* Facebook */}
+                        {/* Facebook */}
+                        <div className="w-10 h-10 rounded-full bg-zinc-900/50 flex items-center justify-center border border-white/5 transition-all">
+                            <Facebook size={16} className="text-[#1877F2] transition-colors duration-300" />
+                        </div>
+                    </div>
+                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-mono uppercase tracking-widest text-zinc-500 font-medium whitespace-nowrap opacity-60">
+                        Targeting
+                    </div>
                 </div>
             </div>
         </div>

@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     title: "Callix | AI Revenue Intelligence",
     description: "Turn your sales calls into scroll-stopping ads.",
     type: "website",
+    images: ['/callix-logo.png'],
   },
 };
 

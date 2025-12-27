@@ -3,6 +3,7 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useInView, useSpring, useMotionValue } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { ShimmerButton } from './ShimmerButton';
 
 // --- Counter Component ---
 const Counter = ({ value, suffix = '', prefix = '', decimals = 0 }: { value: number, suffix?: string, prefix?: string, decimals?: number }) => {
@@ -196,8 +197,19 @@ const StatsSection: React.FC = () => {
                   </div>
                 </div>
                 <div className="mt-6">
-                  <div className="flex items-center gap-2 text-[#FF6B2C] hover:text-white transition-colors text-xs sm:text-sm font-mono tracking-wide uppercase group cursor-pointer w-fit mx-auto lg:mx-0">
-                    Start Optimizing <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                  <div className="flex items-center gap-6 justify-start lg:justify-start w-fit mx-auto lg:mx-0">
+                    <div className="flex items-center gap-2 text-[#FF6B2C] hover:text-white transition-colors text-xs sm:text-sm font-mono tracking-wide uppercase group cursor-pointer">
+                      Start Optimizing <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                    <ShimmerButton
+                      className="shadow-2xl font-dm-sans"
+                      background="black"
+                      shimmerColor="#FFFFFF"
+                      shimmerSize="0.1em"
+                      borderRadius="100px"
+                    >
+                      <span className="text-white font-bold text-[13px] relative z-10">Book Demo</span>
+                    </ShimmerButton>
                   </div>
                 </div>
               </div>
