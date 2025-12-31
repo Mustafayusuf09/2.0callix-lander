@@ -3,10 +3,6 @@
 import React from 'react';
 
 const TheDisconnect: React.FC = () => {
-    // Shared styling for the cards
-    // Using w-full but capping width to maintain the boxy "card" look requested previously.
-    // Using a defined height to ensure uniformity in the grid.
-    const commonCardStyle = "bg-white/5 backdrop-blur-xl border border-white/20 shadow-[0_30px_80px_rgba(0,0,0,0.8),inset_0_0_30px_rgba(255,255,255,0.1)] relative w-full h-[220px] rounded-[32px] overflow-hidden";
 
     return (
         <section className="w-full px-8 lg:px-16 py-32 z-10 bg-transparent relative overflow-hidden text-left">
@@ -119,7 +115,7 @@ const TheDisconnect: React.FC = () => {
                                     <div>
                                         <h3 className="text-white font-serif-elegant text-[22px] mb-2 leading-tight group-hover:text-orange-200 transition-colors">Empty Transcripts</h3>
                                         <p className="text-zinc-500 text-xs font-mono leading-relaxed group-hover:text-zinc-400 transition-colors">
-                                            Call recorders transcribe calls. They don't tell you who’s buying your product.
+                                            Call recorders transcribe calls. They don&apos;t tell you who&apos;s buying your product.
                                         </p>
                                     </div>
                                 </div>

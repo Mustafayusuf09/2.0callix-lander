@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import {
     AudioWaveform,
     Wand2,
@@ -49,10 +49,19 @@ import { ShimmerButton } from './ShimmerButton';
 
 // --- SUB-COMPONENTS FOR VISUALS ---
 
+// ... SUB-COMPONENTS FOR VISUALS ...
+
 const ConversationVisual: React.FC = () => {
     const [step, setStep] = useState(0); // 0: Call, 1: Transition/Analysis
+    const ref = React.useRef(null);
+    const isInView = useInView(ref, { once: false, amount: 0.5 });
 
     useEffect(() => {
+        if (!isInView) {
+            setStep(0); // Reset to initial state when out of view
+            return;
+        }
+
         // Variable duration loop
         let timer: NodeJS.Timeout;
         if (step === 0) {
@@ -63,10 +72,10 @@ const ConversationVisual: React.FC = () => {
             timer = setTimeout(() => setStep(0), 10000);
         }
         return () => clearTimeout(timer);
-    }, [step]);
+    }, [step, isInView]);
 
     return (
-        <div className="w-full h-full p-4 sm:p-8 flex flex-col justify-center relative">
+        <div ref={ref} className="w-full h-full p-4 sm:p-8 flex flex-col justify-center relative">
             {/* Background glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/20 blur-[80px] rounded-full pointer-events-none" />
 
@@ -370,7 +379,7 @@ const SalesPerformanceVisual: React.FC = () => {
                 {/* The Mockup Image */}
                 <div className="relative w-full h-full">
                     <img
-                        src="/dashboard-mockup.png"
+                        src="/sales_performance_mockup.png"
                         alt="Dashboard"
                         className="w-full h-full object-cover object-left-top select-none grayscale-[0.2]"
                     />
@@ -579,7 +588,7 @@ const AttributionAnalyticsVisual: React.FC = () => {
             >
                 <div className="relative w-full h-full">
                     <img
-                        src="/dashboard-mockup.png"
+                        src="/attribution_dashboard_mockup.png"
                         alt="Dashboard"
                         className="w-full h-full object-cover object-top select-none grayscale-[0.2]"
                     />

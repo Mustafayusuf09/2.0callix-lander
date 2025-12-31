@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ShimmerButton } from './ShimmerButton';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Mic, Video, PhoneOff, Hand, MoreVertical, LayoutGrid, Info, MessageSquare, Users, Smile, ChevronUp, MonitorUp, CheckCircle, AlertCircle, Calendar, Zap, TrendingUp, Youtube } from 'lucide-react';
+import { Mic, Video, PhoneOff, Hand, MoreVertical, LayoutGrid, Info, MessageSquare, Users, MonitorUp, CheckCircle, AlertCircle, Calendar } from 'lucide-react';
 
 const features = [
     {
@@ -479,7 +479,7 @@ const ModernCapabilities: React.FC = () => {
 
                                                         {/* YouTube Node (Bottom Right) */}
                                                         <div className="absolute bottom-[20%] right-[10%] w-16 h-16 bg-black/80 rounded-xl border border-white/10 flex items-center justify-center p-3 backdrop-blur-md shadow-[0_0_15px_rgba(255,107,44,0.3)]">
-                                                            <Youtube className="w-6 h-6 text-white text-red-500 fill-current" />
+                                                            <img src="/logos/youtube.png" alt="YouTube" className="w-full h-full object-contain" />
                                                         </div>
                                                     </div>
 

@@ -24,11 +24,11 @@ export const ShimmerButton = React.forwardRef<
         {
             className,
             children,
-            shimmerColor,
-            shimmerSize,
-            borderRadius,
-            shimmerDuration,
-            background,
+            shimmerColor: _shimmerColor,
+            shimmerSize: _shimmerSize,
+            borderRadius: _borderRadius,
+            shimmerDuration: _shimmerDuration,
+            background: _background,
             ...props
         },
         ref

@@ -2,7 +2,7 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { Check, Shield, Users, Lock, FileCheck, Key, MousePointer2 } from 'lucide-react';
+import { Lock, Key, MousePointer2 } from 'lucide-react';
 import { ShimmerButton } from './ShimmerButton';
 import { motion } from 'framer-motion';
 

@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { ShimmerButton } from './ShimmerButton';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 
 interface CardData {
@@ -61,15 +59,7 @@ const IndustryCard: React.FC<CardData> = ({ title, imageUrl }) => (
 const WhoBuiltFor: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 384;
-      scrollContainerRef.current.scrollBy({
-        left: direction === 'right' ? scrollAmount : -scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
+
 
   return (
     <section className="w-full py-32 bg-transparent overflow-hidden border-t border-white/5 relative">
@@ -80,7 +70,7 @@ const WhoBuiltFor: React.FC = () => {
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-16 flex items-end justify-between">
         <h2 className="text-[48px] lg:text-[72px] font-serif-elegant font-normal tracking-tight leading-[1.05] text-white">
-          Who we're built for
+          Who we&apos;re built for
         </h2>
       </div>
 
